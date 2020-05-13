@@ -1,0 +1,20 @@
+\select@language {english}
+\contentsline {section}{\numberline {1}Overview}{6}{section.1}
+\contentsline {section}{\numberline {2}Use cases}{7}{section.2}
+\contentsline {subsection}{\numberline {2.1}Common tooling for observers across observatories}{8}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Avoiding unnecessary proposals for observation time}{8}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Support for weighting proposals}{8}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Identification of planned observations in a certain spectral range for a certain astronomical event}{9}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}Follow-up of Target of Opportunities}{9}{subsection.2.5}
+\contentsline {subsection}{\numberline {2.6}Modification of the plans due to external conditions or anomalies}{9}{subsection.2.6}
+\contentsline {section}{\numberline {3}Observation Locator Elements}{10}{section.3}
+\contentsline {subsection}{\numberline {3.1}Observation Locator data model }{10}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Compulsory metadata}{13}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Implementation of ObsLocTAP as a TAP service}{13}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}TAP Schema}{13}{subsection.3.4}
+\contentsline {section}{\numberline {4}Use Cases as TAP/ADQL queries}{15}{section.4}
+\contentsline {subsection}{\numberline {4.1}Discovery of observations scheduled or planned for a certain observatory}{15}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Identification of planned observations in a certain spectral range for a certain astronomical object}{15}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Modification of the plans due to external conditions or anomalies}{16}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Follow-up of Target of Opportunities}{16}{subsection.4.4}
+\contentsline {section}{\numberline {5}Registering ObsLocTAP services}{17}{section.5}
