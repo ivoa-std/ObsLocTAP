@@ -5,7 +5,7 @@
 \contentsline {subsection}{\numberline {2.2}Avoiding unnecessary proposals for observation time}{8}{subsection.2.2}
 \contentsline {subsection}{\numberline {2.3}Support for weighting proposals}{8}{subsection.2.3}
 \contentsline {subsection}{\numberline {2.4}Identification of planned observations in a certain spectral range for a certain astronomical event}{9}{subsection.2.4}
-\contentsline {subsection}{\numberline {2.5}Follow-up of Target of Opportunities}{9}{subsection.2.5}
+\contentsline {subsection}{\numberline {2.5}Follow-up of Targets of Opportunity}{9}{subsection.2.5}
 \contentsline {subsection}{\numberline {2.6}Modification of the plans due to external conditions or anomalies}{9}{subsection.2.6}
 \contentsline {section}{\numberline {3}Observation Locator Elements}{10}{section.3}
 \contentsline {subsection}{\numberline {3.1}Observation Locator data model }{10}{subsection.3.1}
