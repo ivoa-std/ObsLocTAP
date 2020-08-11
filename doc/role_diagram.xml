@@ -12,13 +12,7 @@ with missing dependencies.
 
 <archdiag xmlns="http://ivoa.net/archdiag">
 	<!-- Registry: x=55, y=150..450 -->
-	<rec name="RegTAP" x="55" y="180"/>
-	<rec name="RegistryInterface" x="55" y="205"/>
-	<rec name="Resource M.D." x="55" y="230"/>
-	<rec name="TAPRegExt" x="55" y="255"/>
-        <prerec name="UWSRegExt" x="55" y="280"/>
 	<rec name="VODataService" x="55" y="350"/>
-	<rec name="StandardsRegExt" x="55" y="375"/>
 
 	<rec name="Identifiers" x="125" y="425"/>
 
@@ -34,15 +28,12 @@ with missing dependencies.
 	<!-- Data Models: x=430..580, y=250..400 -->
 	<rec name="ObsCore" x="600" y="205"/>
 	<rec name="STC" x="550" y="230"/>
-	<rec name="CharDM" x="450" y="255"/>
-	<prerec name="ProvDM" x="450" y="330"/>
 
 	<!-- GWS: all over the place -->
 
 	<!-- Semantics: x=160..250 y=250..400 -->
 	<rec name="VOUnits" x="200" y="250"/>
 	<rec name="UCD" x="160" y="310"/>
-	<rec name="Vocabularies" x="160" y="335"/>
 
 	<!-- TD -->
 </archdiag>
