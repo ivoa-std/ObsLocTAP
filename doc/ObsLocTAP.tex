@@ -14,14 +14,18 @@
 \usepackage[english]{babel}
 
 %Import the natbib package and sets a bibliography  and citation styles
-\usepackage{natbib}
-\bibliographystyle{abbrvnat}
+%\usepackage{natbib}
+%\bibliographystyle{abbrvnat}
+
 
 \usepackage[utf8]{inputenc}
 
 \usepackage{booktabs,xcolor,siunitx}
 \definecolor{texcolor}{rgb}{0.4,0.1,0.1}
 \definecolor{lightgray}{gray}{0.9}
+
+\lstloadlanguages{SQL}
+\lstset{flexiblecolumns=true,basicstyle=\ttfamily}
 
 \iftth
   \newcommand{\BibTeX}{BibTeX}
@@ -35,8 +39,8 @@
 
 \ivoagroup{Data Model Working Group}
 
-\author{Jesús Salgado}
 \author{Aitor Ibarra}
+\author{Jesús Salgado}
 \author{Matthias Ehle}
 \author{Carlos Gabriel}
 \author{James Dempsey}
@@ -60,7 +64,6 @@
 \author{Lian Tao}
 \author{Aaron Tohuvavohu}
 \author{Bill Workman}
-\author{TBC: Representatives of a large multi-observatory collaboration}
 
 \editor{Jesús Salgado}
 \editor{Aitor Ibarra}
@@ -70,47 +73,26 @@
 \begin{document}
 
 \begin{abstract}
-The \textbf{Observation Locator Table Access Protocol (ObsLocTAP) }document
-describes the necessary data model elements and the access protocol to discover
-metadata about observations for a given Astronomical Observatory through a
-uniform interface within the VO framework. 
 
-The used data model makes reference to IVOA Observation Data Model elements
-(\cite{Lou17}), removing the ones associated to datasets access, as these
-elements are not available yet for future observations that are planned,
-scheduled, performed but not archived. In this way, present standard is focused
-on the access to metadata related to the planning of a certain observatory, more
-than in the access to the scientific data products of a certain observation.
-Also, the data model described in the present standard will be focused on
-metadata discovery, useful for multiwavelength coordination observations. However, 
-and in order to prevent coupling between ObsCore and ObsLocTAP standards, ObsLocTAP 
-defines its own data model.
+  The Observation Locator Table Access Protocol (ObsLocTAP)
+  defines a data model for scheduled observations and a method to run
+  queries over compliant data, using several Virtual Observatory
+  technologies. 
+  
+  The data model builds on the ObsCore data model, removing elements
+  associated to datasets access, not present during the plannification phase. 
+  In this way, present standard is focused on the access to metadata related
+  to the planning of a certain observatory, more than in the access to the 
+  scientific data products. Also, the data model will be focused on observation 
+  plannification discovery, what is very useful information for 
+  multiwavelength coordination observations, re-plannig information
+  propagation, follow-up of Targets of Opportunity alerts, preparation of
+  proposals, etc.
+  
+  As with ObsCore, a serialisation into a relational table is defined, which allows
+  users to run complex queries using the IVOA Table Access Protocol.
+  The document also prescribes how to register and discover ObsLocTAP services.
 
-The access protocol will be expressed by the implementation of an IVOA Table Access 
-Protocol (TAP) (\cite{Pat10}), that, as described in the use cases, allows a powerful 
-discovery process and, also, the implementation of the use cases proposed in the 
-present specification.
-
-\textbf{ObsLocTAP} services could be registered using a TAP VOResource Extension 
-(\cite{Dem15}) providing the relevant ObsLocTAP capability. Exact details of the 
-VOResource Extension will be defined in another appropriate standard definition.
-
-In the case of a simple use case, planned observations of a certain target can be 
-discovered via a TAP and ADQL (\cite{Ina08}) query that searches for sky regions 
-(or FOV) that overlap a certain sky coordinate. Adding a certain radius to the sky 
-coordinates and/or filtering by instrument identifier could expand this simple use 
-case.
-
-As described in TAP, the service will return a list of performed observations of 
-the given target and also the future planned and/or scheduled observations in 
-VOTable (\cite{Fra13}) format or, optionally, in other tabular serialization 
-format, e.g., JSON. 
-
-The information about the planned observation, in the near future, will be subject 
-to changes due to any operational issue (re-planning, ToO alerts, etc). Thus, an 
-implementation of the service may support additional search parameters (some of 
-which may be custom to that particular service) to more finely control the selection 
-of the observation information.
 \end{abstract}
 
 \section*{Acknowledgments}
@@ -138,80 +120,15 @@ The figure below shows where ObsLocTAP protocol fits within the IVOA architectur
 %%%%%%%%%%%%%%%%%%%% Figure/Image No: 1 starts here %%%%%%%%%%%%%%%%%%%%
 
 \begin{figure}[H]
-\advance\leftskip 0.0in	\includegraphics[width=6.0in,height=4.73in]{./role_diagram.pdf}
+\advance\leftskip 0.0in	\includegraphics[width=5.0in,height=4.73in]{./role_diagram.pdf}
 \end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%% Figure/Image No: 1 Ends here %%%%%%%%%%%%%%%%%%%%
+ObsLocTAP makes reuse of different elements of ObsCore, using TAP as access protocol and making use of STC to serialize geometrical entities. Also, queries are written
+following ADQL as query language and the default result is defined in VOTable format, including units in a VOUnits compatible format, UCDs to describe columns and Identifiers to point to the data model. Finally, ObsLocTAP services can be registered making use of the VODataService standard format.
 
 \pagebreak
-\vspace{\baselineskip}
-{\fontsize{16pt}{19.2pt}\selectfont \textbf{\textcolor[HTML]{005A9C}{Change Log}}\par}\par
-
-
-
-%%%%%%%%%%%%%%%%%%%% Table No: 2 starts here %%%%%%%%%%%%%%%%%%%%
-
-
-\begin{table}[H]
- 			\centering
-\begin{tabular}{p{3.75in}p{0.92in}p{0.8in}}
-\hline
-%row no:1
-\multicolumn{1}{|p{3.75in}}{\textbf{Change}} & 
-\multicolumn{1}{|p{0.92in}}{\textbf{Section}} & 
-\multicolumn{1}{|p{0.8in}|}{\textbf{Date}} \\
-%row no:2
-\multicolumn{1}{|p{3.75in}}{First Version} & 
-\multicolumn{1}{|p{0.92in}}{All} & 
-\multicolumn{1}{|p{0.8in}|}{{\fontsize{10pt}{12.0pt}\selectfont 20180710}} \\
-%row no:3
-\multicolumn{1}{|p{3.75in}}{Service renamed to ObsLocTAP} & 
-\multicolumn{1}{|p{0.92in}}{All} & 
-\multicolumn{1}{|p{0.8in}|}{{\fontsize{10pt}{12.0pt}\selectfont 20180713}} \\
-%row no:4
-\multicolumn{1}{|p{3.75in}}{Typos} & 
-\multicolumn{1}{|p{0.92in}}{All} & 
-\multicolumn{1}{|p{0.8in}|}{{\fontsize{10pt}{12.0pt}\selectfont 20180904}} \\
-%row no:5
-\multicolumn{1}{|p{3.75in}}{Data model re-definition (introduction of ivoa:obsplan ) \par Better definition of $``$category$"$  and $``$Priority$"$ } & 
-\multicolumn{1}{|p{0.92in}}{All} & 
-\multicolumn{1}{|p{0.8in}|}{{\fontsize{10pt}{12.0pt}\selectfont 20180913}} \\
-%row no:6
-\multicolumn{1}{|p{3.75in}}{Adding better distinction between planned, scheduled, performed and archived observations} & 
-\multicolumn{1}{|p{0.92in}}{All} & 
-\multicolumn{1}{|p{0.8in}|}{{\fontsize{10pt}{12.0pt}\selectfont 20190215}} \\
-%row no:7
-\multicolumn{1}{|p{3.75in}}{Correction of s\_fov as a circle radius. Possible use of more complex footprints as objects to be defined} & 
-\multicolumn{1}{|p{0.92in}}{All} & 
-\multicolumn{1}{|p{0.8in}|}{{\fontsize{10pt}{12.0pt}\selectfont 20190215}} \\
-%row no:8
-\multicolumn{1}{|p{3.75in}}{Introduction of s\_region to cover more complex footprints} & 
-\multicolumn{1}{|p{0.92in}}{All} & 
-\multicolumn{1}{|p{0.8in}|}{{\fontsize{10pt}{12.0pt}\selectfont 20190802}} \\
-%row no:9
-\multicolumn{1}{|p{3.75in}}{Many typos correction} & 
-\multicolumn{1}{|p{0.92in}}{All} & 
-\multicolumn{1}{|p{0.8in}|}{{\fontsize{10pt}{12.0pt}\selectfont 20190802}} \\
-%row no:10
-\multicolumn{1}{|p{3.75in}}{Use cases upgrade} & 
-\multicolumn{1}{|p{0.92in}}{4} & 
-\multicolumn{1}{|p{0.8in}|}{{\fontsize{10pt}{12.0pt}\selectfont 20190802}} \\
-%row no:11
-\multicolumn{1}{|p{3.75in}}{Add registering description} & 
-\multicolumn{1}{|p{0.92in}}{5} & 
-\multicolumn{1}{|p{0.8in}|}{{\fontsize{10pt}{12.0pt}\selectfont 20190802}} \\
-%row no:12
-\multicolumn{1}{|p{3.75in}}{Migration to LaTeX/github} & 
-\multicolumn{1}{|p{0.92in}}{All} & 
-\multicolumn{1}{|p{0.8in}|}{{\fontsize{10pt}{12.0pt}\selectfont 20200514}} \\
-\hline
-\end{tabular}
- \end{table}
-
-\pagebreak
-
-%%%%%%%%%%%%%%%%%%%% Table No: 2 ends here %%%%%%%%%%%%%%%%%%%%
 
 
 \section{Overview}
@@ -247,34 +164,21 @@ In order to standardize the workflow of one observation, status is defined as fo
 	\item \textbf{Archived}: the observation has data available and can be found in a science archive. This archived phase is the main target of the ObsCore specification, so it can be considered out of the scope of the present specification.
 \end{itemize}
 
-This service would allow client applications to use a standardized VO service to aggregate 
-and display the information of former and future observations. This new standard will help 
+This new standard would allow client applications to use a standardized VO service
+to aggregateand display the information of former and future observations. This new standard will help 
 inthe preparation of multi-observatory multi-instrument observation campaigns, whose 
 coordination needs certain standards for efficient communication.
 
-The ObsLocTAP interface makes use of the IVOA TAP (\cite{Pat10}) to access observational
-metadata. The IVOA TAP protocol is a powerful and quite flexible system, easy to beadapted 
-to different use cases by only having an agreed data model and the definition of a set of 
-ADQL (\cite{Ina08}) queries that allow the implementation of different use cases. There 
-are several open source implementations that could be used by the community (minimizing 
-the implementation effort for the observatories) and it has been efficiently used in 
-operational archives like, e.g., the Gaia Archive.
+The ObsLocTAP interface makes use of the IVOA TAP (\cite{2019ivoa.spec.0927D}) to access observational metadata. The IVOA TAP protocol is a powerful and quite flexible
+system, easy to be adapted to a wide variety of use cases simply by defining 
+agreed-upon table structures users can write complex queries against using the common
+Astronomical Data Query Language (\cite{2008ivoa.spec.1030O})
 
-Making use of TAP, the following requirements of ObsLocTAP need to be fulfilled:
+There are several TAP open source implementations that could be used by the community (minimizing the implementation effort for the observatories) and it has been
+efficiently used in operational archives like, e.g., the Gaia Archive.
 
-\begin{itemize}
-	\item queries encoded as URLs\par
-
-	\item query language based on ADQL defines the way to express geometrical queries and other filters as numeric ranges and value lists, 
-
-	\item the use of VOTable for encoding search results,
-
-	\item the mechanism for handling errors
-\end{itemize}
-
-Exact definition of the TAP service and functionality is present into the relevant IVOA 
-standards (TAP and ADQL). In current document, we will focus the description of the Data 
-Model, tables and use cases. No deviation from standard TAP or ADQL is foreseen.
+In current document, we will focus the description of the Data Model, tables and use cases. No deviation from standard TAP or ADQL is foreseen, where TAP defines the mechanisms to exchange queries and data as well as error messages and ADQL the
+query language syntax.
 
 \section{Use cases}
 The planning process can be usually described as follows (although observatories can 
@@ -563,19 +467,18 @@ Additional parameters may be used to customize the visibility checks.
 
 As can be seen, most of the data model elements come from the IVOA Characterization 
 data model and the exact description of these fields is present in the IVOA ObsCore 
-standard (\cite{Lou17}).
+standard (\cite{2017ivoa.spec.0509L}).
 
 \textbf{\textit{s\_region}}, as described on IVOA ObsCore standard, can be used to 
-precisely specify the covered spatial region of a data product. On the SELECT part, 
-the output is always an STC-S string as described in (\cite{TAP}) [section 6]. In the 
-WHERE clause, the \textit{s\_region} column can be used with the ADQL geometry functions 
-(INTERSECTS, CONTAINS) to specify conditions; the service will generally have to translate 
-these into native SQL that enforces the same conditions or a suitable approximation. 
-Implementers may approximate the spatial query conditions by translating the INTERSECTS 
-and CONTAINS function calls in the query. In case the exact final region cannot be 
-specified (e.g., because an undefined position angle of the planned observation), 
-s\_region will be just a CIRCLE with the center position as \textbf{s\_ra} and \textbf{s\_dec} 
-and a radius of \textbf{s\_fov}/2.
+precisely specify the covered spatial region of a data product. Until a new standard
+becomes authoritative for such fields, s\_region will be serialised according to
+section 6 of TAP 1.0 \citep{2011ivoa.spec.1028T}. In the WHERE clause, s\_region
+constraints will generally make use of ADQL geometries (CIRCLE, POLYGON, POINT) and
+the geometry predicate functions (CONTAINS, INTERSECTS).
+
+In case the exact final region cannot be specified (e.g., because an undefined position angle of the planned observation), s\_region can be approximated by
+implementors as a CIRCLE with the center position as \textbf{s\_ra} and 
+\textbf{s\_dec} and a radius of \textbf{s\_fov}/2.
 
 The planning time (\textbf{t\_planning}) has been added in order to allow the discovery 
 of the time when this observation (scientific entity) has been added (or modified) to 
@@ -606,12 +509,11 @@ be one of executed or aborted.
 
 \subsection{Compulsory metadata}
 In contrast to normal ObsTAP services where most of the metadata is compulsory, in the 
-case of ObsLocTAP, this cannot always be maintained. In some cases, the target associated 
-to the observations could still be confidential information which needs to be hidden. 
-This hidden identification of future observations is not always applicable for all the 
-observatories but it is not so unusual. The same approach of hidden information status 
-could also be applied to the instruments or configurations used so the metadata should 
-be present as follows:
+case of ObsLocTAP, this cannot always be maintained. In some cases, the target associated to the observations could still be confidential information which needs to
+be hidden due to, e.g., observatories confidentiallity constrains.
+
+The same approach of hidden information status could also be applied to the
+instruments or configurations used so the metadata should be present as follows:
 
 \begin{itemize}
 	\item For confidential observations that need to be hidden from the planning point of view, the period should be shown as blocked. That means that an entry should appear with the start time, end time and duration as relevant. The facility name should also be provided.
@@ -624,12 +526,10 @@ be present as follows:
 \end{itemize}
 
 \subsection{Implementation of ObsLocTAP as a TAP service}
-In order to allow a powerful publication of the ObsLocTAP metadata, it has been decided to 
-publish it through a TAP service. As described into the IVOA TAP standard (\cite{Pat10}), 
-a TAP service is a web-service that allows the access to tabular data.\par
-
-In order to fulfill some advanced use cases, ObsLocTAP services MUST provide, at least, the 
-following ADQL (\cite{Ina08}) geometrical features: CIRCLE, POLYGON, INTERSECTS and 
+The primary access path to ObsLocTAP information is through TAP 
+(\cite{2010ivoa.spec.0327D}) database queries. In order to fulfill some advanced
+use cases, ObsLocTAP services MUST provide, at least, the following ADQL
+(\cite{2008ivoa.spec.1030O}) geometrical features: CIRCLE, POLYGON, INTERSECTS and 
 CONTAINS.\par
 
 \subsection{TAP Schema}
@@ -644,180 +544,180 @@ The following table gives the entries for the ivoa.obsplan table in TAP\_SCHEMA.
 \textbf{column\_name} & 
 \textbf{data type} & 
 \textbf{units} & 
-\textbf{UCD} & 
-\textbf{utype} \\
+\textbf{utype} & 
+\textbf{UCD} \\
 \hline
 %row no:2
 t\_planning & 
-adql:DOUBLE & 
+Floating Point & 
 d & 
 & 
 \\
 \hline
 %row no:3
 target\_name & 
-adql:VARCHAR & 
+CHAR(*) & 
 & 
-meta,id;src & 
-Target.name \\
+Target.name &
+meta,id;src \\ 
 \hline
 %row no:4
 obs\_id & 
-adql:VARCHAR & 
+CHAR(*) & 
 & 
-meta.id & 
-DataID.observationID \\
+DataID.observationID &
+meta.id \\
 \hline
 %row no:5
 obs\_collection & 
-adql:VARCHAR & 
+CHAR(*) & 
 & 
-meta.id & 
-DataID.collection \\
+DataID.collection &
+meta.id \\
 \hline
 %row no:6
 s\_ra & 
-adql:DOUBLE & 
+Floating Point & 
 deg & 
 Char.SpatialAxis.Coverage.Location.Coord.Position2D.Value2.C1 & 
 pos.eq.ra \\
 \hline
 %row no:7
 s\_dec & 
-adql:DOUBLE & 
+Floating Point & 
 deg & 
 Char.SpatialAxis.Coverage.Location.Coord.Position2D.Value2.C2 & 
 pos.eq.dec \\
 \hline
 %row no:8
 s\_fov & 
-adql:DOUBLE & 
+Floating Point & 
 deg & 
 Char.SpatialAxis.Coverage.Bounds.Extent.diameter & 
 phys.angSize;instr.fov \\
 \hline
 %row no:9
 s\_region & 
-adql:REGION & 
+REGION & 
 & 
 Char.SpatialAxis.Coverage.Support.Area & 
 pos.outline;obs.field \\
 \hline
 %row no:10
 s\_resolution & 
-adql:DOUBLE & 
+Floating Point & 
 arcsec & 
 Char.SpatialAxis.Resolution.Refval.value & 
 pos.angResolution \\
 \hline
 %row no:11
 t\_min & 
-adql:DOUBLE & 
+Floating Point & 
 d & 
 Char.TimeAxis.Coverage.Bounds.Limits.StartTime & 
 time.start;obs.exposure \\
 \hline
 %row no:12
 t\_max & 
-adql:DOUBLE & 
+Floating Point & 
 d & 
 Char.TimeAxis.Coverage.Bounds.Limits.StopTime & 
 time.end;obs.exposure \\
 \hline
 %row no:13
 t\_exptime & 
-adql:DOUBLE & 
+Floating Point & 
 s & 
 Char.TimeAxis.Coverage.Support.Extent & 
 time.duration;obs.exposure \\
 \hline
 %row no:14
 t\_resolution & 
-adql:DOUBLE & 
+Floating Point & 
 s & 
 Char.TimeAxis.Resolution.Refval.value & 
 time.resolution \\
 \hline
 %row no:15
 em\_min & 
-adql:DOUBLE & 
+Floating Point & 
 m & 
 Char.SpectralAxis.Coverage.Bounds.Limits.LoLimit & 
 em.wl;stat.min \\
 \hline
 %row no:16
 em\_max & 
-adql:DOUBLE & 
+Floating Point & 
 m & 
 Char.SpectralAxis.Coverage.Bounds.Limits.HiLimit & 
 em.wl;stat.max \\
 \hline
 %row no:17
 em\_res\_power & 
-adql:DOUBLE & 
+Floating Point & 
 & 
 Char.SpectralAxis.Resolution.ResolPower.refVal & 
 spect.resolution \\
 \hline
 %row no:18
 o\_ucd & 
-adql:VARCHAR & 
+CHAR(*) & 
 & 
 Char.ObservableAxis.ucd & 
 meta.ucd \\
 \hline
 %row no:19
 pol\_states & 
-adql:VARCHAR & 
+CHAR(*) & 
 & 
 Char.PolarizationAxis.stateList & 
 meta.code;phys.polarization \\
 \hline
 %row no:20
 pol\_xel & 
-adql:BIGINT & 
+INTEGER & 
 & 
 Char.PolarizationAxis.numBins & 
 meta.number \\
 \hline
 %row no:21
 facility\_name & 
-adql:VARCHAR & 
+CHAR(*) & 
 & 
  Provenance.ObsConfig.Facility.name & 
 meta.id;instr.tel \\
 \hline
 %row no:22
 instrument\_name & 
-adql:VARCHAR & 
+CHAR(*) & 
 & 
 Provenance.ObsConfig.Instrument.name & 
 meta.id;instr \\
 \hline
 %row no:23
 t\_plan\_exptime & 
-adql:DOUBLE & 
+Floating Point  & 
 s & 
 Char.TimeAxis.Coverage.Support.Extent & 
 time.duration;obs.exposure \\
 \hline
 %row no:24
 category & 
-adql:VARCHAR & 
+CHAR(*) & 
 & 
 & 
 \\
 \hline
 %row no:25
 priority & 
-adql:INTEGER & 
+INTEGER & 
 & 
 & 
 \\
 \hline
 %row no:26
 execution\_status & 
-adql:VARCHAR & 
+CHAR(*)& 
 & 
 & 
 \\
@@ -839,66 +739,42 @@ Planned observations on a certain time period can be discovered as per using the
 following ADQL query:
 
 %%%%%%%%%%%%%%%%%%%% Table No: 5 starts here %%%%%%%%%%%%%%%%%%%%
-\bigskip
-\par
-\begingroup\setlength{\fboxsep}{0pt}
-\colorbox{lightgray}{%
-\begin{tabular}{|p{5.53in}|}
-\hline
-%row no:1
-SELECT $\ast$  FROM ivoa.obsplan WHERE  \par  t\_min\  <\ \  \textit{<end\_time>} AND \par  t\_max\ \ >  \textit{<start\_time>} \\
-\hline
-\end{tabular}%
-}\endgroup
-\par
-\bigskip
+\begin{lstlisting}[language=SQL]
+SELECT * FROM ivoa.obsplan WHERE 
+t_min < <end_time> AND 
+t_max > <start_time>
+\end{lstlisting}
 %%%%%%%%%%%%%%%%%%%% Table No: 5 ends here %%%%%%%%%%%%%%%%%%%%
 Where \textit{<start\_time>} and \textit{<end\_time> }are the minimum and maximum times 
 of the period to be requested in MJD. This query provides observations that overlap with 
 a certain time range, e.g.,
 
 %%%%%%%%%%%%%%%%%%%% Table No: 6 starts here %%%%%%%%%%%%%%%%%%%%
-\bigskip
-\par
-\begingroup\setlength{\fboxsep}{0pt}
-\colorbox{lightgray}{%
-\begin{tabular}{|p{5.53in}|}
-\hline
-%row no:1
-SELECT $\ast$  FROM ivoa.obsplan WHERE  \par  t\_min < 58700 AND  \par  t\_max\  > 58500 \\
-\hline
-\end{tabular}%
-}\endgroup
-\par
-\bigskip
+\begin{lstlisting}[language=SQL]
+SELECT * FROM ivoa.obsplan WHERE
+t_min < 58700 AND
+t_max  > 58500
+\end{lstlisting}
 %%%%%%%%%%%%%%%%%%%% Table No: 6 ends here %%%%%%%%%%%%%%%%%%%%
 
-To find observations planned between 17/01/2019 and 05/08/2019.
+To find observations planned between 2019-01-17 and 2019-08-05.
 
 \subsection{Identification of planned observations in a certain spectral range for a certain astronomical object}
-Sending the same ADQL query to all the available ObsLocTAP servers can discover planned 
-observations that cover a certain spectral range:
+Sending the same ADQL query to all the available ObsLocTAP servers can discover planned observations that cover a certain spectral range:
 
 %%%%%%%%%%%%%%%%%%%% Table No: 7 starts here %%%%%%%%%%%%%%%%%%%%
-\bigskip
-\par
-\begingroup\setlength{\fboxsep}{0pt}
-\colorbox{lightgray}{%
-\begin{tabular}{|p{5.53in}|}
-\hline
-%row no:1
-SELECT $\ast$  FROM ivoa.obsplan WHERE  \par  t\_min\ \ <\   \textit{<end\_time>} AND \par  t\_max\ \ >  \textit{<start\_time> } AND \par  em\_min < \textit{<spectral\_coordinate\_max>} AND \par  em\_max > \textit{<spectral\_coordinate\_min>} \\
-\hline
-\end{tabular}%
-}\endgroup
-\par
-\bigskip
+\begin{lstlisting}[language=SQL]
+SELECT * FROM ivoa.obsplan WHERE
+t_min < <end_time> AND
+t_max > <start_time> AND 
+em_min < <spectral_coordinate_max> AND
+em_max > <spectral_coordinate_min>
+\end{lstlisting}
 %%%%%%%%%%%%%%%%%%%% Table No: 7 ends here %%%%%%%%%%%%%%%%%%%%
-where the overlap pattern has been used for the spectral coordinate. Please note that 
-clients can use the spectral coordinate coverage (if present) of the ObsLocTAP registration 
-to prevent sending unnecessary queries to observatories that do not overlap the expected 
-spectral coordinate. Filtering of services using registration metadata will be described 
-into the TAP Registration Extension definition for ObsLocTAP.
+where the overlap pattern has been used for the spectral coordinate. 
+Where ObsLocTAP services give coverage information in their Registry records,
+services outside of the spectral area of interest can already be skipped based on resource metadata. Filtering of services using registration metadata will be
+described into the TAP Registration Extension definition for ObsLocTAP services.
 \par
 
 The values of the spectral coordinate should be defined, as per the ObsCore data model defines, 
@@ -911,19 +787,11 @@ ObsLocTAP server:
 
 
 %%%%%%%%%%%%%%%%%%%% Table No: 8 starts here %%%%%%%%%%%%%%%%%%%%
-\bigskip
-\par
-\begingroup\setlength{\fboxsep}{0pt}
-\colorbox{lightgray}{%
-\begin{tabular}{|p{5.53in}|}
-\hline
-%row no:1
-SELECT $\ast$  FROM ivoa.obsplan WHERE  \par  t\_planning\ \ >\   \textit{<saved\_copy\_time>}\ \ \ \ \ \ \  AND  \par  t\_max\ \ \ \ \ \ \ \ \ <\   \textit{<maximum\_time\_requested>} \\
-\hline
-\end{tabular}%
-}\endgroup
-\par
-\bigskip
+\begin{lstlisting}[language=SQL]
+SELECT *  FROM ivoa.obsplan WHERE
+t_planning > <saved_copy_time> AND
+t_max < <maximum_time_requested>
+\end{lstlisting}
 %%%%%%%%%%%%%%%%%%%% Table No: 8 ends here %%%%%%%%%%%%%%%%%%%%
 In this case, users can send a first query to the ObsLocTAP server and save the copy of 
 the response. Then, a next query can be sent later to the service using the t\_planning 
@@ -941,39 +809,27 @@ In order to exactly track changes in the plan due to a known target of opportuni
 geometrical constraint can be added to the ADQL query as follows:
 
 %%%%%%%%%%%%%%%%%%%% Table No: 9 starts here %%%%%%%%%%%%%%%%%%%%
-\bigskip
-\par
-\begingroup\setlength{\fboxsep}{0pt}
-\colorbox{lightgray}{%
-\begin{tabular}{|p{5.53in}|}
-\hline
-%row no:1
-SELECT $\ast$  FROM ivoa.obsplan WHERE  \par  t\_planning\ \ >\   \textit{<saved\_copy\_time>}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  AND  \par  t\_max\ \ \ \ \ \ \ \ \ <\   \textit{<maximum\_time\_requested> }\  AND \par  1=INTERSECTS(s\_region, \par \  CIRCLE('ICRS', \textit{<TOO\_ra>} , \textit{<TOO\_dec>}, \textit{<RADIUS>})) \\
-\hline
-\end{tabular}%
-}\endgroup
-\par
-\bigskip
+\begin{lstlisting}[language=SQL]
+SELECT *  FROM ivoa.obsplan WHERE
+t_planning > <saved_copy_time> AND
+t_max < <maximum_time_requested> AND
+1=INTERSECTS(s_region, 
+CIRCLE('ICRS', <TOO_ra>, <TOO_dec>, <RADIUS>))
+\end{lstlisting}
 %%%%%%%%%%%%%%%%%%%% Table No: 9 ends here %%%%%%%%%%%%%%%%%%%%
 
 by adding an intersects operation of the observation field of view and a circle centered on the coordinates of a certain target of opportunity, \textit{<TOO\_ra>} and \textit{<TOO\_dec>}, and with a certain uncertainty radius defined as \textit{<radius>, e.g.,}
 
 %%%%%%%%%%%%%%%%%%%% Table No: 10 starts here %%%%%%%%%%%%%%%%%%%%
-\bigskip
-\par
-\begingroup\setlength{\fboxsep}{0pt}
-\colorbox{lightgray}{%
-\begin{tabular}{|p{5.53in}|}
-\hline
-%row no:1
-SELECT $\ast$  FROM ivoa.obsplan WHERE  \par  t\_planning\ \ >\   \textit{58500}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  AND  \par  t\_max\ \ \ \ \ \ \ \ \ <\   \textit{58502\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  }AND \par  1=INTERSECTS(s\_region, \par \  CIRCLE('ICRS', \textit{114.8251}, \textit{1.6179}, \textit{0.016666})) \\
-\hline
-\end{tabular}%
-}\endgroup
-\par
-\bigskip
+\begin{lstlisting}[language=SQL]
+SELECT *  FROM ivoa.obsplan WHERE
+t_planning > 58500 AND
+t_max < 58502 AND
+1=INTERSECTS(s_region, 
+CIRCLE('ICRS', 114.8251, 1.6179, 0.016666))
+\end{lstlisting}
 %%%%%%%%%%%%%%%%%%%% Table No: 10 ends here %%%%%%%%%%%%%%%%%%%%
-where we are checking whether there are any newly planned observations from 58500 (17/01/2019) on the next two days (58502 or 19/01/2019) around the target PKS 0736+017, with a radius of 1 arcmin.
+where we are checking whether there are any newly planned observations from 58500 (2019-01-17) on the next two days (58502 or 2019-01-19) around the target PKS 0736+017, with a radius of 1 arcmin.
 \par
 
 
@@ -986,19 +842,9 @@ ivoa.obsplan table's utype set to:
 
 
 %%%%%%%%%%%%%%%%%%%% Table No: 11 starts here %%%%%%%%%%%%%%%%%%%%
-\bigskip
-\par
-\begingroup\setlength{\fboxsep}{0pt}
-\colorbox{lightgray}{%
-\begin{tabular}{|p{5.53in}|}
-\hline
-%row no:1
-ivo://ivoa.net/std/ObsLocTAP$\#$ table-1.0.\ \ \   \\
-\hline
-\end{tabular}%
-}\endgroup
-\par
-\bigskip
+\begin{lstlisting}[language=SQL]
+ivo://ivoa.net/std/ObsLocTAP#table-1.0.
+\end{lstlisting}
 %%%%%%%%%%%%%%%%%%%% Table No: 11 ends here %%%%%%%%%%%%%%%%%%%%
 
 
@@ -1007,24 +853,92 @@ A RegTAP 1.1 query discovering the access URLs of all ObsLocTAP services served 
 TAP 1.x services would then be:      
 
 %%%%%%%%%%%%%%%%%%%% Table No: 12 starts here %%%%%%%%%%%%%%%%%%%%
-\bigskip
-\par
-\begingroup\setlength{\fboxsep}{0pt}
-\colorbox{lightgray}{%
-\begin{tabular}{|p{5.53in}|}
-\hline
-%row no:1
-SELECT ivoid, res\_title, access\_url\ \ \ \ \ FROM\ \ \ \ \   rr.resource\ \ \ \ \ \   \par NATURAL JOIN rr.capability\ \ \ \ \ \   \par NATURAL JOIN rr.interface\ \ \ \ \ \   \par NATURAL JOIN rr.res\_table\ \ \ \   \par WHERE\ \ \ \ \ \  table\_utype='ivo://ivoa.net/std/obsloctap$\#$ table-1.0'\ \ \ \ \ \   \par AND standard\_id='ivo://ivoa.net/std/tap$\#$ aux'\ \ \ \ \ \   \par AND intf\_role='std'\ \ \ \ \   \par AND authenticated\_only=0\ \  \\
-\hline
-\end{tabular}%
-}\endgroup
-\par
-\bigskip
+\begin{lstlisting}[language=SQL]
+SELECT ivoid, res_title, access_url
+FROM rr.resource
+NATURAL JOIN rr.capability
+NATURAL JOIN rr.interface
+NATURAL JOIN rr.res_table
+WHERE 
+table_utype='ivo://ivoa.net/std/obsloctap#table-1.0' AND
+standard_id LIKE 'ivoa.net/std/tap%' AND
+intf_role='std' AND
+authenticated_only=0
+\end{lstlisting}
 %%%%%%%%%%%%%%%%%%%% Table No: 12 ends here %%%%%%%%%%%%%%%%%%%%
 Clients probably want make sure the only query one access url per ivoid (this is in\ 
-case\ multiple TAP capabilities are given for one   resource).
+case\ multiple TAP capabilities are given for one resource).
 \par
 
-\bibliography{bibliography}
+\appendix
+\section{Changes from Previous Versions}
+
+%%%%%%%%%%%%%%%%%%%% change log starts here %%%%%%%%%%%%%%%%%%%%
+
+\begin{table}[H]
+ 			\centering
+\begin{tabular}{p{3.75in}p{0.92in}p{0.8in}}
+\hline
+%row no:1
+\multicolumn{1}{|p{3.75in}}{\textbf{Change}} & 
+\multicolumn{1}{|p{0.72in}}{\textbf{Section}} & 
+\multicolumn{1}{|p{0.9in}|}{\textbf{Version}} \\
+%row no:2
+\multicolumn{1}{|p{3.75in}}{First Version} & 
+\multicolumn{1}{|p{0.72in}}{All} & 
+\multicolumn{1}{|p{0.9in}|}{{\fontsize{10pt}{12.0pt}\selectfont WD-20180713}} \\
+%row no:3
+\multicolumn{1}{|p{3.75in}}{Service renamed to ObsLocTAP} & 
+\multicolumn{1}{|p{0.72in}}{All} & 
+\multicolumn{1}{|p{0.9in}|}{{\fontsize{10pt}{12.0pt}\selectfont WD-20180713}} \\
+%row no:4
+\multicolumn{1}{|p{3.75in}}{Typos} & 
+\multicolumn{1}{|p{0.72in}}{All} & 
+\multicolumn{1}{|p{0.9in}|}{{\fontsize{10pt}{12.0pt}\selectfont WD-20180904}} \\
+%row no:5
+\multicolumn{1}{|p{3.75in}}{Data model re-definition (introduction of ivoa:obsplan ) \par Better definition of $``$category$"$  and $``$Priority$"$ } & 
+\multicolumn{1}{|p{0.72in}}{All} & 
+\multicolumn{1}{|p{0.9in}|}{{\fontsize{10pt}{12.0pt}\selectfont WD-20190215}} \\
+%row no:6
+\multicolumn{1}{|p{3.75in}}{Adding better distinction between planned, scheduled, performed and archived observations} & 
+\multicolumn{1}{|p{0.72in}}{All} & 
+\multicolumn{1}{|p{0.9in}|}{{\fontsize{10pt}{12.0pt}\selectfont WD-20190215}} \\
+%row no:7
+\multicolumn{1}{|p{3.75in}}{Correction of s\_fov as a circle radius. Possible use of more complex footprints as objects to be defined} & 
+\multicolumn{1}{|p{0.72in}}{All} & 
+\multicolumn{1}{|p{0.9in}|}{{\fontsize{10pt}{12.0pt}\selectfont WD-20190215}} \\
+%row no:8
+\multicolumn{1}{|p{3.75in}}{Introduction of s\_region to cover more complex footprints} & 
+\multicolumn{1}{|p{0.72in}}{All} & 
+\multicolumn{1}{|p{0.9in}|}{{\fontsize{10pt}{12.0pt}\selectfont WD-20190909}} \\
+%row no:9
+\multicolumn{1}{|p{3.75in}}{Many typos correction} & 
+\multicolumn{1}{|p{0.72in}}{All} & 
+\multicolumn{1}{|p{0.9in}|}{{\fontsize{10pt}{12.0pt}\selectfont WD-20190909}} \\
+%row no:10
+\multicolumn{1}{|p{3.75in}}{Use cases upgrade} & 
+\multicolumn{1}{|p{0.72in}}{4} & 
+\multicolumn{1}{|p{0.9in}|}{{\fontsize{10pt}{12.0pt}\selectfont WD-20190909}} \\
+%row no:11
+\multicolumn{1}{|p{3.75in}}{Add registering description} & 
+\multicolumn{1}{|p{0.72in}}{5} & 
+\multicolumn{1}{|p{0.9in}|}{{\fontsize{10pt}{12.0pt}\selectfont WD-20190909}} \\
+%row no:12
+\multicolumn{1}{|p{3.75in}}{Migration to LaTeX/github} & 
+\multicolumn{1}{|p{0.72in}}{All} & 
+\multicolumn{1}{|p{0.9in}|}{{\fontsize{10pt}{12.0pt}\selectfont PR-20200514}} \\
+%row no:12+1
+\multicolumn{1}{|p{3.75in}}{Formating changes and typos} & 
+\multicolumn{1}{|p{0.72in}}{All} & 
+\multicolumn{1}{|p{0.9in}|}{{\fontsize{10pt}{12.0pt}\selectfont PR-20200811}} \\
+\hline
+\end{tabular}
+ \end{table}
+
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%% Table No: 2 ends here %%%%%%%%%%%%%%%%%%%%
+
+\bibliography{ivoatex/ivoabib,ivoatex/docrepo}
 
 \end{document}
