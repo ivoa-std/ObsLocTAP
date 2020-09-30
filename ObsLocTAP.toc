@@ -18,4 +18,4 @@
 \contentsline {subsection}{\numberline {4.3}Modification of the plans due to external conditions or anomalies}{15}{subsection.4.3}%
 \contentsline {subsection}{\numberline {4.4}Follow-up of Target of Opportunities}{15}{subsection.4.4}%
 \contentsline {section}{\numberline {5}Registering ObsLocTAP services}{16}{section.5}%
-\contentsline {section}{\numberline {A}Changes from Previous Versions}{17}{appendix.A}%
+\contentsline {section}{\numberline {A}Changes from Previous Versions}{16}{appendix.A}%
