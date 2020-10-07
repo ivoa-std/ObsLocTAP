@@ -76,11 +76,11 @@
   technologies.
 
   The data model builds on the ObsCore data model, removing elements
-  associated to datasets access, not present during the plannification phase.
+  associated to datasets access, not present during the planification phase.
   In this way, present standard is focused on the access to metadata related
   to the planning of a certain observatory, more than in the access to the
   scientific data products. Also, the data model will be focused on observation
-  plannification discovery, what is very useful information for
+  planification discovery, what is very useful information for
   multiwavelength coordination observations, re-plannig information
   propagation, follow-up of Targets of Opportunity alerts, preparation of
   proposals, etc.
@@ -167,7 +167,7 @@ follows:
   This is only at the operational level as there is not guarantee of scientific
   results.}
 
-	\item{\textbf{Aborted}: the observation has not been correctly performed.
+	\item{\textbf{Aborted}: the observation has not been correctly performed. 
 	The observation could be recovered as planned into the planning log.}
 
 	\item{\textbf{Archived}: the observation has data available and can be found
@@ -490,7 +490,7 @@ Planned or scheduled exposure time \\
 category &
 unitless &
 String &
-Observation category. One of the following values: Fixed, Coordinated, Window,
+Observation category. One of the following values: Fixed, Coordinated, Window, 
 Other \\
 \hline
 %row no:26
@@ -948,8 +948,6 @@ Clients probably want make sure the only query one access url per ivoid
 (this is in\ case\ multiple TAP capabilities are given for one resource).
 \par
 \section{Registration Resource Example}
-The following XML shows an example on how an ObsLocTAP service
-resource registration.
 %%%%%%%%%%%%%%%%%%%% Table No: starts here %%%%%%%%%%%%%%%%%%%%
 \begin{lstlisting}[language=XML]
 <ri:Resource
