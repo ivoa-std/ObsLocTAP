@@ -41,6 +41,7 @@
 \author{James Dempsey}
 \author{Markus Demleitner}
 \author{María Díaz Trigo}
+\author{Karl Foster}
 \author{Jaime Kennea}
 \author{Mark Kettenis}
 \author{Peter Kretschmar}
@@ -130,7 +131,6 @@ services can be registered making use of the VODataService standard format.
 
 \pagebreak
 
-
 \section{Overview}
 The \textbf{Observation Locator Table Access Protocol} (ObsLocTAP henceforth)
 specifies in a standard format services to retrieve information about planned,
@@ -147,7 +147,8 @@ follows:
 %%%%%%%%%%%%%%%%%%%% Figure/Image No: 0 starts here %%%%%%%%%%%%%%%%%%%%
 
 \begin{figure}[H]
-\advance\leftskip 0.0in		\hfill\includegraphics{./media/observations_workflow.png}\hfill\strut%
+\advance\leftskip 0.0in		\hfill\includegraphics[width=5.0in]
+{./media/observations_workflow.png}\hfill\strut%
 \end{figure}
 %%%%%%%%%%%%%%%%%%%% Figure/Image No: 1 starts here %%%%%%%%%%%%%%%%%%%%
 
@@ -160,13 +161,14 @@ follows:
 	observation can be executed. Also, some changes could be expected on
   coordinates (due to some refinement) and other fields.}
 
+	\item{\textbf{Unscheduled}: the observation has been removed from the schedule.   	     The observation could be recovered as planned into the planning log.}
+
 	\item{\textbf{Performed}: the observation has been performed successfully.
   This is only at the operational level as there is not guarantee of scientific
   results.}
 
-	\item{\textbf{Aborted}: the observation has not been correctly performed (or
-  removed from the schedule). The observation could be recovered as planned
-  into the planning log.}
+	\item{\textbf{Aborted}: the observation has not been correctly performed. 
+	The observation could be recovered as planned into the planning log.}
 
 	\item{\textbf{Archived}: the observation has data available and can be found
   in a science archive. This archived phase is the main target of the ObsCore
@@ -488,7 +490,8 @@ Planned or scheduled exposure time \\
 category &
 unitless &
 String &
-Observation category (fixed, coordinated, etc...) \\
+Observation category. One of the following values: Fixed, Coordinated, Window, 
+Other \\
 \hline
 %row no:26
 priority &
@@ -500,7 +503,7 @@ Priority level $ \{ $ 0, 1, 2$ \} $ \\
 execution\_status &
 unitless &
 String &
-One of the following values:  Planned, Scheduled, Performed, Aborted \\
+One of the following values:  Planned, Scheduled, UnScheduled, Performed, Aborted \\
 \hline
 \end{tabular}
 \end{table}
@@ -944,6 +947,79 @@ authenticated_only=0
 Clients probably want make sure the only query one access url per ivoid
 (this is in\ case\ multiple TAP capabilities are given for one resource).
 \par
+\section{Registration Resource Example}
+%%%%%%%%%%%%%%%%%%%% Table No: starts here %%%%%%%%%%%%%%%%%%%%
+\begin{lstlisting}[language=XML]
+<ri:Resource
+	xmlns:ri="http://www.ivoa.net/xml/RegistryInterface/v1.0"
+	xmlns:vr="http://www.ivoa.net/xml/VOResource/v1.0"
+	xmlns:vs="http://www.ivoa.net/xml/VODataService/v1.1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	created="2020-10-07T09:00:00"
+	updated="2020-10-07T09:00:00"
+	status="active"
+	xsi:type="vs:CatalogService">
+  <title>Integral Obseration Locator (ObsLocTAP)</title>
+  <shortName>Integral OL</shortName>
+
+  <identifier>ivo://esavo/ila/obsloctap</identifier>
+  <curation>
+    <publisher>European Space Agency</publisher>
+    <contact>
+       <name>ESDC Leads</name>
+       <email>esdc_leads@sciops.esa.int</email>
+    </contact>
+  </curation>
+
+  <content>
+    <subject>gamma-ray-observatories</subject>
+    <subject>space-vehicles</subject>
+    <description>This resource publishes the observations of the
+    	Integral orbiting gamma ray observatory using the
+    	Observation Locator TAP protocol.</description>
+    <referenceURL>
+    	https://www.cosmos.esa.int/web/integral/integral-data-archives
+    </referenceURL>
+  </content>
+
+  <capability standardID="ivo://ivoa.net/std/TAP#aux"
+  		xsi:type="vr:Capability">
+    <interface role="std" xsi:type="vs:ParamHTTP">
+       <accessURL use="full">https://ila.esac.esa.int/tap/tap</accessURL>
+    </interface>
+  </capability>
+
+  <tableset>
+    <schema>
+    <name>ivoa</name>
+     	<table>
+        <name>ivoa.obsplan</name>
+        <description>The Integral observations in the
+         	ObsLocTAP schema.</description>
+        <utype>ivo://ivoa.net/std/obsloctap#table-1.0</utype>
+        <column>
+         	<name>t_planning</name>
+         	<description>Time in MJD when this observation has been added
+         		or modified into the planning log</description>
+         	<unit>d</unit>
+         	<dataType xsi:type="vs:VOTableType">double</dataType>
+        	<flag>indexed</flag>
+        </column>
+        <column>
+         	<name>target_name</name>
+         	<description>Astronomical object observed, if any</description>
+					<ucd>meta.id;src</ucd>
+        	<dataType xsi:type="vs:VOTableType" arraysize="*">char</dataType>
+        	<flag>indexed</flag>
+        </column>
+        <!-- and so on, see sect. 3.4 -->
+			</table>
+		</schema>
+	</tableset>
+</ri:Resource>
+
+\end{lstlisting}
+%%%%%%%%%%%%%%%%%%%% Table No:  ends here %%%%%%%%%%%%%%%%%%%%
 
 \appendix
 \section{Changes from Previous Versions}
@@ -1005,7 +1081,15 @@ Clients probably want make sure the only query one access url per ivoid
 %row no:12+1
 \multicolumn{1}{|p{3.75in}}{Formating changes and typos} &
 \multicolumn{1}{|p{0.72in}}{All} &
-\multicolumn{1}{|p{0.9in}|}{{\fontsize{10pt}{12.0pt}\selectfont PR-20200811}} \\
+\multicolumn{1}{|p{0.9in}|}{{\fontsize{10pt}{12.0pt}\selectfont PR-20201007}} \\
+%row no:14
+\multicolumn{1}{|p{3.75in}}{Add comments from community workshops} &
+\multicolumn{1}{|p{0.72in}}{All} &
+\multicolumn{1}{|p{0.9in}|}{{\fontsize{10pt}{12.0pt}\selectfont PR-20201007}} \\
+%row no:15
+\multicolumn{1}{|p{3.75in}}{Add registration example} &
+\multicolumn{1}{|p{0.72in}}{All} &
+\multicolumn{1}{|p{0.9in}|}{{\fontsize{10pt}{12.0pt}\selectfont PR-20201007}} \\
 \hline
 \end{tabular}
  \end{table}
