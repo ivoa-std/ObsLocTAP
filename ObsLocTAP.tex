@@ -934,14 +934,14 @@ through TAP 1.x services would then be:
 \begin{lstlisting}[language=SQL]
 SELECT ivoid, res_title, access_url
 FROM rr.resource
-NATURAL JOIN rr.capability
-NATURAL JOIN rr.interface
-NATURAL JOIN rr.res_table
+  NATURAL JOIN rr.capability
+  NATURAL JOIN rr.interface
+  NATURAL JOIN rr.res_table
 WHERE
-table_utype='ivo://ivoa.net/std/obsloctap#table-1.0' AND
-standard_id LIKE 'ivoa.net/std/tap%' AND
-intf_role='std' AND
-authenticated_only=0
+  table_utype='ivo://ivoa.net/std/obsloctap#table-1.0'
+  AND standard_id LIKE 'ivoa.net/std/tap%'
+  AND intf_role='std'
+  AND authenticated_only=0
 \end{lstlisting}
 %%%%%%%%%%%%%%%%%%%% Table No: 12 ends here %%%%%%%%%%%%%%%%%%%%
 Clients probably want make sure the only query one access url per ivoid
