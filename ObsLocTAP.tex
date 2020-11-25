@@ -919,13 +919,7 @@ ObsLocTAP services are registered as VODataService CatalogResources. They MUST
 have one or more auxiliary TAP capabilities pointing to the TAP service(s) at
 which the ivoa.obsplan table can be queried. They furthermore MUST have a
 tableset, with the ivoa.obsplan table's utype set to:
-
-
-%%%%%%%%%%%%%%%%%%%% Table No: 11 starts here %%%%%%%%%%%%%%%%%%%%
-\begin{lstlisting}[language=SQL]
-ivo://ivoa.net/std/ObsLocTAP#table-1.0.
-\end{lstlisting}
-%%%%%%%%%%%%%%%%%%%% Table No: 11 ends here %%%%%%%%%%%%%%%%%%%%
+$$\hbox{\verb|ivo://ivoa.net/std/ObsLocTAP#table-1.0|}.$$
 
 A RegTAP 1.1 query discovering the access URLs of all ObsLocTAP services served
 through TAP 1.x services would then be:
