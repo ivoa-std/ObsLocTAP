@@ -26,9 +26,7 @@
   \newcommand{\BibTeX}{BibTeX}
 \fi
 
-\newcommand{\comicstuff}[1]{
-    \begin{html}<span class="comic">#1</span>\end{html}}
-\customcss{custom.css}
+\hyphenation{Obs-Core}
 
 \title{Observation Locator Table Access Protocol}
 
@@ -340,12 +338,13 @@ is reduced to:
 %%%%%%%%%%%%%%%%%%%% Table No: 3 starts here %%%%%%%%%%%%%%%%%%%%
 \begin{landscape}
 \begin{table}
+\def\hlstrut{\vrule height 13pt depth5pt width0pt}
 \begin{tabular}{ |l|l|l|l| }
 \hline
-\textbf{Column Name} &
-\textbf{Unit} &
-\textbf{Type} &
-\textbf{Description} \\
+\hlstrut\textbf{Column Name} &
+\hlstrut\textbf{Unit} &
+\hlstrut\textbf{Type} &
+\hlstrut\textbf{Description} \\
 \hline
 %row no:2
 t\_planning &
@@ -607,14 +606,15 @@ TAP\_SCHEMA.columns
 %%%%%%%%%%%%%%%%%%%% Table No: 4 starts here %%%%%%%%%%%%%%%%%%%%
 \begin{landscape}
 \begin{table}
+\def\hlstrut{\vrule height 13pt depth5pt width0pt}
 \begin{tabular}{ |l|l|l|l|l|l| }
 \hline
 %row no:1
-\textbf{column\_name} &
-\textbf{data type} &
-\textbf{units} &
-\textbf{utype} &
-\textbf{UCD} \\
+\hlstrut\textbf{column\_name} &
+\hlstrut\textbf{data type} &
+\hlstrut\textbf{units} &
+\hlstrut\textbf{utype} &
+\hlstrut\textbf{UCD} \\
 \hline
 %row no:2
 t\_planning &
@@ -919,13 +919,7 @@ ObsLocTAP services are registered as VODataService CatalogResources. They MUST
 have one or more auxiliary TAP capabilities pointing to the TAP service(s) at
 which the ivoa.obsplan table can be queried. They furthermore MUST have a
 tableset, with the ivoa.obsplan table's utype set to:
-
-
-%%%%%%%%%%%%%%%%%%%% Table No: 11 starts here %%%%%%%%%%%%%%%%%%%%
-\begin{lstlisting}[language=SQL]
-ivo://ivoa.net/std/ObsLocTAP#table-1.0.
-\end{lstlisting}
-%%%%%%%%%%%%%%%%%%%% Table No: 11 ends here %%%%%%%%%%%%%%%%%%%%
+$$\hbox{\verb|ivo://ivoa.net/std/ObsLocTAP#table-1.0|}.$$
 
 A RegTAP 1.1 query discovering the access URLs of all ObsLocTAP services served
 through TAP 1.x services would then be:
@@ -934,14 +928,14 @@ through TAP 1.x services would then be:
 \begin{lstlisting}[language=SQL]
 SELECT ivoid, res_title, access_url
 FROM rr.resource
-NATURAL JOIN rr.capability
-NATURAL JOIN rr.interface
-NATURAL JOIN rr.res_table
+  NATURAL JOIN rr.capability
+  NATURAL JOIN rr.interface
+  NATURAL JOIN rr.res_table
 WHERE
-table_utype='ivo://ivoa.net/std/obsloctap#table-1.0' AND
-standard_id LIKE 'ivoa.net/std/tap%' AND
-intf_role='std' AND
-authenticated_only=0
+  table_utype='ivo://ivoa.net/std/obsloctap#table-1.0'
+  AND standard_id LIKE 'ivoa.net/std/tap%'
+  AND intf_role='std'
+  AND authenticated_only=0
 \end{lstlisting}
 %%%%%%%%%%%%%%%%%%%% Table No: 12 ends here %%%%%%%%%%%%%%%%%%%%
 Clients probably want make sure the only query one access url per ivoid
