@@ -75,11 +75,11 @@
 
   The data model builds on the ObsCore data model, removing elements
   associated to datasets access, not present during the planification phase.
-  In this way, present standard is focused on the access to metadata related
+  In this way, the present standard is focused on the access to metadata related
   to the planning of a certain observatory, more than in the access to the
   scientific data products. Also, the data model will be focused on observation
   planification discovery, what is very useful information for
-  multi-wavelength coordination observations, re-plannig information
+  multi-wavelength coordination observations, re-planning information
   propagation, follow-up of Targets of Opportunity alerts, preparation of
   proposals, etc.
 
@@ -191,7 +191,8 @@ There are several TAP open source implementations that could be used by the
 community (minimizing the implementation effort for the observatories) and it
 has been efficiently used in operational archives like, e.g., the Gaia Archive.
 
-In current document, we will focus the description of the Data Model, tables
+In the current document, we will focus on
+the description of the Data Model, tables
 and use cases. No deviation from standard TAP or ADQL is foreseen, where TAP
 defines the mechanisms to exchange queries and data as well as error messages
 and ADQL the query language syntax.
@@ -214,7 +215,7 @@ can have different procedures to fulfill this process):
   short-medium plan trying to maximize the relevance of a certain observation
   period (e.g., per night or orbit revolution) and taking into account the
   constraints of the observatory (e.g., visibility of the object, geometrical
-  constrains like the Sun or the Earth for space-based observatories, etc).}
+  constraints like the Sun or the Earth for space-based observatories, etc).}
 
 	\item{In case of unexpected events like, e.g., targets of opportunity, the
   scheduled plan could be replaced by another one modifying the short or
@@ -564,7 +565,7 @@ The final state will be one of executed or aborted.
 In contrast to normal ObsTAP services where most of the metadata is compulsory,
 in the case of ObsLocTAP, this cannot always be maintained. In some cases, the
 target associated to the observations could still be confidential information
-which needs to be hidden due to, e.g., observatories confidentiality constrains.
+which needs to be hidden due to, e.g., observatory confidentiality constraints.
 
 The same approach of hidden information status could also be applied to the
 instruments or configurations used so the metadata should be present as follows:
@@ -580,7 +581,7 @@ instruments or configurations used so the metadata should be present as follows:
 
 	\item{Observational metadata about instrument, spectral coverage and
   polarization states should appear with a general default value, describing a
-  non-detailed mode, but with values that are more general for the exact ones
+  non-detailed mode, but with values that are more general than the exact ones
   to be used during the real observation. For example, a general X-ray spectral
   coverage could appear in \textit{em\_min} and \textit{em\_max} for an X-ray
   observatory but not the exact details of the instrument mode that will be used
@@ -877,7 +878,7 @@ metadata.
 
 \subsection{Follow-up of Target of Opportunities}
 Observing plans can be tracked with a simple ADQL query sent to the ObsLocTAP
-servers described in previous point.
+servers described in the previous point.
 \par
 
 In order to exactly track changes in the plan due to a known target of
