@@ -74,11 +74,11 @@
   technologies.
 
   The data model builds on the ObsCore data model, removing elements
-  associated to datasets access, not present during the planification phase.
-  In this way, the present standard is focused on the access to metadata related
-  to the planning of a certain observatory, more than in the access to the
-  scientific data products. Also, the data model will be focused on observation
-  planification discovery, what is very useful information for
+  associated with dataset access that are not available during the planning phase.
+  In this way, this standard is focused on access to metadata related
+  to the planning of a certain observatory, more than on access to the
+  scientific data products. Also, the data model will be focused on discovery
+  of planned observations, which is very useful information for
   multi-wavelength coordination observations, re-planning information
   propagation, follow-up of Targets of Opportunity alerts, preparation of
   proposals, etc.
@@ -98,7 +98,7 @@ IVOA members in general.
 
 The words ``MUST'', ``SHALL'', ``SHOULD'', ``MAY'', ``RECOMMENDED'', and
 ``OPTIONAL'' (in upper or lower case) used in this document are to be
-interpreted as described in IETF standard RFC2119 (\citep{std:RFC2119}).
+interpreted as described in IETF standard RFC2119 (\citealt{std:RFC2119}).
 
 The \emph{Virtual Observatory (VO)} is a
 general term for a collection of federated resources that can be used
@@ -120,9 +120,9 @@ architecture:
 
 
 %%%%%%%%%%%%%%%%%%%% Figure/Image No: 1 Ends here %%%%%%%%%%%%%%%%%%%%
-ObsLocTAP makes reuse of different elements of ObsCore, using TAP as access
-protocol and making use of STC to serialize geometrical entities. Also, queries
-are written following ADQL as query language and the default result is defined
+ObsLocTAP reuses various model elements (including geometrical entities) of ObsCore and, 
+as ObsCore itself, relies on the TAP specification to deploy its relational content.
+Also, queries are written following ADQL as the query language and the default result is defined
 in VOTable format, including units in a VOUnits compatible format, UCDs to
 describe columns and Identifiers to point to the data model. Finally, ObsLocTAP
 services can be registered making use of the VODataService standard format.
@@ -131,7 +131,7 @@ services can be registered making use of the VODataService standard format.
 
 \section{Overview}
 The \textbf{Observation Locator Table Access Protocol} (ObsLocTAP henceforth)
-specifies in a standard format services to retrieve information about planned,
+specifies in a standard format, services to retrieve information about planned,
 scheduled and performed observations of a given target (or coordinates) for a
 given astronomical observatory based on the existing ObsCore data model. This
 standard does not describe the access to data obtained after the processing of
@@ -181,13 +181,13 @@ observations. This new standard will help in the preparation of
 multi-observatory multi-instrument observation campaigns, whose
 coordination needs certain standards for efficient communication.
 
-The ObsLocTAP interface makes use of the IVOA TAP (\cite{2019ivoa.spec.0927D})
+The ObsLocTAP interface makes use of the IVOA TAP (\citealt{2019ivoa.spec.0927D})
 to access observational metadata. The IVOA TAP protocol is a powerful and quite
-flexible system, easy to be adapted to a wide variety of use cases simply by
-defining agreed-upon table structures users can write complex queries against
-using the common Astronomical Data Query Language (\cite{2008ivoa.spec.1030O})
+flexible system, easily adapted to a wide variety of use cases simply by
+defining agreed-upon table structures. Users can write complex queries against these
+using the common Astronomical Data Query Language (ADQL; \citealt{2008ivoa.spec.1030O})
 
-There are several TAP open source implementations that could be used by the
+There are several open source TAP implementations that could be used by the
 community (minimizing the implementation effort for the observatories) and it
 has been efficiently used in operational archives like, e.g., the Gaia Archive.
 
@@ -226,7 +226,7 @@ can have different procedures to fulfill this process):
 Standardizing the way to publish this short/medium plan through ObsLocTAP
 services provides higher scientific impact of the observing time, follow-up of
 astronomical events and better cooperation between observatories. We present
-here a selected list of user cases. Later in the document, we will show how
+here a selected list of use cases. Later in the document, we will show how
 these use cases can be fulfilled using the current specification:
 
 \subsection{Common tooling for observers across observatories}
@@ -350,7 +350,7 @@ is reduced to:
 %row no:2
 t\_planning &
 d &
-double &
+Floating point &
 Time in MJD when this observation has been added or modified into the
 planning log \\
 \hline
@@ -375,19 +375,19 @@ Name of the data collection \\
 %row no:6
 s\_ra &
 deg &
-double &
+Floating point &
 Central right ascension, ICRS \\
 \hline
 %row no:7
 s\_dec &
 deg  &
-double &
+Floating point &
 Central declination, ICRS \\
 \hline
 %row no:8
 s\_fov  &
 deg &
-double &
+Floating point &
 Diameter (bounds) of the covered region \\
 \hline
 %row no:9
@@ -399,49 +399,49 @@ Sky region covered by the data product (expressed in ICRS frame) \\
 %row no:10
 s\_resolution &
 arcsec &
-double &
+Floating point &
 Spatial resolution of data as FWHM \\
 \hline
 %row no:11
 t\_min &
 d &
-double &
+Floating point &
 Start time in MJD \\
 \hline
 %row no:12
 t\_max &
 d &
-double &
+Floating point &
 Stop time in MJD \\
 \hline
 %row no:13
 t\_exptime &
 s &
-double &
+Floating point &
 Total exposure time \\
 \hline
 %row no:14
 t\_resolution &
 s &
-double &
+Floating point &
 Temporal resolution FWHM \\
 \hline
 %row no:15
 em\_min &
 m &
-double &
+Floating point &
 Start in spectral coordinates \\
 \hline
 %row no:16
 em\_max &
 m &
-double &
+Floating point &
 Stop in spectral coordinates \\
 \hline
 %row no:17
 em\_res\_power &
 unitless &
-double &
+Floating point &
 Spectral resolving power \\
 \hline
 %row no:18
@@ -483,7 +483,7 @@ Observation release date (ISO 8601) \\
 %row no:24
 t\_plan\_exptime &
 s &
-double &
+Floating point &
 Planned or scheduled exposure time \\
 \hline
 %row no:25
@@ -503,7 +503,7 @@ Priority level $ \{ $ 0, 1, 2$ \} $ \\
 execution\_status &
 unitless &
 String &
-One of the following values:  Planned, Scheduled, UnScheduled, Performed, Aborted \\
+One of the following values:  Planned, Scheduled, Unscheduled, Performed, Aborted \\
 \hline
 \end{tabular}
 \end{table}
@@ -519,12 +519,12 @@ customize the visibility checks.
 
 As can be seen, most of the data model elements come from the IVOA
 Characterization data model and the exact description of these fields is
-present in the IVOA ObsCore standard (\cite{2017ivoa.spec.0509L}).
+present in the IVOA ObsCore standard (\citealt{2017ivoa.spec.0509L}).
 
 \textbf{\textit{s\_region}}, as described on IVOA ObsCore standard, can be
 used to precisely specify the covered spatial region of a data product. Until
 a new standard becomes authoritative for such fields, s\_region will be
-serialised according to section 6 of TAP 1.0 \citep{2011ivoa.spec.1028T}. In
+serialised according to section 6 of TAP 1.0 (\citealt{2011ivoa.spec.1028T}). In
 the WHERE clause, s\_region constraints will generally make use of ADQL
 geometries (CIRCLE, POLYGON, POINT) and the geometry predicate functions
 (CONTAINS, INTERSECTS).
@@ -542,7 +542,7 @@ of future observations with a previously download one).
 
 The planning exposure time (\textbf{t\_plan\_exptime}) has been added in order
 to show any possible inconsistency between the scheduled exposure time and the
-real performed exposure time (t\_\textbf{exptime}). If an observation was
+real performed exposure time (\textbf{t\_exptime}). If an observation was
 performed without problems, both quantities must be exactly the same. Any
 discrepancy between these two values will reflect problems or deviations between
 scheduled observations and performed observations.
@@ -557,7 +557,7 @@ therefore cannot be removed from the planning or are hard to re-schedule. If the
 observation can be easily shifted to a different time (value=0), the user could
 query the service to identify this type of observations.
 
-Execution status provides a description of the current status of the planned
+Execution status (\textbf{execution\_status}) provides a description of the current status of the planned
 observation. Initially, observations are inserted as planned into the system.
 The final state will be one of executed or aborted.
 
@@ -595,9 +595,9 @@ instruments or configurations used so the metadata should be present as follows:
 
 \subsection{Implementation of ObsLocTAP as a TAP service}
 The primary access path to ObsLocTAP information is through TAP
-(\cite{2010ivoa.spec.0327D}) database queries. In order to fulfill some advanced
+(\citealt{2010ivoa.spec.0327D}) database queries. In order to fulfill some advanced
 use cases, ObsLocTAP services MUST provide, at least, the following ADQL
-(\cite{2008ivoa.spec.1030O}) geometrical features: CIRCLE, POLYGON, INTERSECTS
+(\citealt{2008ivoa.spec.1030O}) geometrical features: CIRCLE, POLYGON, INTERSECTS
 and CONTAINS.\par
 
 \subsection{TAP Schema}
@@ -629,7 +629,7 @@ target\_name &
 CHAR(*) &
 &
 Target.name &
-meta,id;src \\
+meta.id;src \\
 \hline
 %row no:4
 obs\_id &
@@ -806,7 +806,7 @@ first part of this note as ADQL queries to an ObsLocTAP service.
 
 \subsection{Discovery of observations scheduled or planned for a certain
 observatory}
-Planned observations on a certain time period can be discovered as per using the
+Planned observations on a certain time period can be discovered using the
 following ADQL query:
 
 %%%%%%%%%%%%%%%%%%%% Table No: 5 starts here %%%%%%%%%%%%%%%%%%%%
@@ -848,7 +848,7 @@ where the overlap pattern has been used for the spectral coordinate.
 Where ObsLocTAP services give coverage information in their Registry records,
 services outside of the spectral area of interest can already be skipped based
 on resource metadata. Filtering of services using registration metadata will be
-described into the TAP Registration Extension definition for ObsLocTAP services.
+described into the TAP Registration Extension (TAPRegExt; \citealt{std:TAPREGEXT}) definition for ObsLocTAP services.
 \par
 
 The values of the spectral coordinate should be defined, as per the ObsCore data
@@ -857,6 +857,7 @@ ranges, this homogeneity allows the use of the same ADQL query to all the
 servers.
 
 \subsection{Modification of the plans due to external conditions or anomalies}
+\label{sec:UseCaseModPlans}
 Follow-up of changing observing plans can be tracked with a simple ADQL query
 sent to the ObsLocTAP server:
 
@@ -878,7 +879,7 @@ metadata.
 
 \subsection{Follow-up of Target of Opportunities}
 Observing plans can be tracked with a simple ADQL query sent to the ObsLocTAP
-servers described in the previous point.
+servers described in Section \ref{sec:UseCaseModPlans}.
 \par
 
 In order to exactly track changes in the plan due to a known target of
@@ -896,7 +897,7 @@ CIRCLE('ICRS', <TOO_ra>, <TOO_dec>, <RADIUS>))
 
 by adding an intersects operation of the observation field of view and a circle
 centered on the coordinates of a certain target of opportunity,
-\textit{<TOO\_ra>} and \textit{<TOO\_dec>}, and with a certain uncertainty
+\textit{<TOO\_ra>} and \textit{<TOO\_dec>}, and with an uncertainty
 radius defined as \textit{<radius>, e.g.,}
 
 %%%%%%%%%%%%%%%%%%%% Table No: 10 starts here %%%%%%%%%%%%%%%%%%%%
@@ -939,7 +940,7 @@ WHERE
   AND authenticated_only=0
 \end{lstlisting}
 %%%%%%%%%%%%%%%%%%%% Table No: 12 ends here %%%%%%%%%%%%%%%%%%%%
-Clients probably want make sure the only query one access url per ivoid
+Clients probably want to make sure they only query one access url per ivoid
 (this is in\ case\ multiple TAP capabilities are given for one resource).
 \par
 \section{Registration Resource Example}
