@@ -354,166 +354,112 @@ is reduced to:
 \begin{tabular}{ |l|l|l|l| }
 \hline
 \hlstrut\textbf{Column Name} &
-\hlstrut\textbf{Unit} &
-\hlstrut\textbf{Type} &
 \hlstrut\textbf{Description} \\
 \hline
 %row no:2
 t\_planning &
-d &
-Floating point &
 Time in MJD when this observation has been added or modified into the
 planning log \\
 \hline
 %row no:3
 target\_name &
-unitless &
-String &
 Astronomical object observed, if any \\
 \hline
 %row no:4
 obs\_id &
-unitless &
-String &
 Observation ID \\
 \hline
 %row no:5
 obs\_collection &
-unitless &
-String &
 Name of the data collection \\
 \hline
 %row no:6
 s\_ra &
-deg &
-Floating point &
 Central right ascension, ICRS \\
 \hline
 %row no:7
 s\_dec &
-deg  &
-Floating point &
 Central declination, ICRS \\
 \hline
 %row no:8
 s\_fov  &
-deg &
-Floating point &
 Diameter (bounds) of the covered region \\
 \hline
 %row no:9
 s\_region &
-&
-String &
 Sky region covered by the data product (expressed in ICRS frame) \\
 \hline
 %row no:10
 s\_resolution &
-arcsec &
-Floating point &
 Spatial resolution of data as FWHM \\
 \hline
 %row no:11
 t\_min &
-d &
-Floating point &
 Start time in MJD \\
 \hline
 %row no:12
 t\_max &
-d &
-Floating point &
 Stop time in MJD \\
 \hline
 %row no:13
 t\_exptime &
-s &
-Floating point &
 Total exposure time \\
 \hline
 %row no:14
 t\_resolution &
-s &
-Floating point &
 Temporal resolution FWHM \\
 \hline
 %row no:15
 em\_min &
-m &
-Floating point &
 Start in spectral coordinates \\
 \hline
 %row no:16
 em\_max &
-m &
-Floating point &
 Stop in spectral coordinates \\
 \hline
 %row no:17
 em\_res\_power &
-unitless &
-Floating point &
 Spectral resolving power \\
 \hline
 %row no:18
 o\_ucd &
-unitless &
-String &
 UCD of observable (e.g., phot.flux.density, phot.count, etc.) \\
 \hline
 %row no:19
 pol\_states &
-unitless &
-String &
 List of polarization states or NULL if not applicable \\
 \hline
 %row no:20
 pol\_xel &
-unitless &
-integer &
 Number of polarization samples \\
 \hline
 %row no:21
 facility\_name &
-unitless &
-String &
 Name of the facility used for this observation \\
 \hline
 %row no:22
 instrument\_name &
-unitless &
-String &
 Name of the instrument used for this observation \\
 \hline
 %row no:23
 obs\_release\_date &
-unitless &
-date &
 Observation release date (ISO 8601) \\
 \hline
 %row no:24
 t\_plan\_exptime &
-s &
-Floating point &
 Planned or scheduled exposure time \\
 \hline
 %row no:25
 category &
-unitless &
-String &
 Observation category. One of the following values: Fixed, Coordinated, Window, 
 Other \\
 \hline
 %row no:26
 priority &
-unitless &
-enum integer &
 Priority level $ \{ $ 0, 1, 2$ \} $ \\
 \hline
 %row no:27
 execution\_status &
-unitless &
-String &
 One of the following values:  Planned, Scheduled, Unscheduled, Performed, Aborted \\
 \hline
 \end{tabular}
@@ -521,6 +467,10 @@ One of the following values:  Planned, Scheduled, Unscheduled, Performed, Aborte
 \end{landscape}
 
 %%%%%%%%%%%%%%%%%%%% Table No: 3 ends here %%%%%%%%%%%%%%%%%%%%
+The obsplan table exposed by an ObsLocTAP service MUST include all 
+the columns listed, even though null values may be permitted in some
+of the columns. Additional non-standard columns are permitted in a 
+particular obsplan table implementation.
 
 The purpose of the observation locator query is to allow users/clients to
 retrieve the information of planned observations of a particular target or
@@ -533,9 +483,11 @@ Characterization data model and the exact description of these fields is
 present in the IVOA ObsCore standard (\citealt{2017ivoa.spec.0509L}).
 
 \textbf{\textit{s\_region}}, as described on IVOA ObsCore standard, can be
-used to precisely specify the covered spatial region of a data product. Until
-a new standard becomes authoritative for such fields, s\_region will be
-serialised according to section 6 of TAP 1.0 (\citealt{2011ivoa.spec.1028T}). In
+used to precisely specify the covered spatial region of a data product. The
+s\_region geometrical field is allowed to be serialised according DALI 1.1
+(\citealt{std:DALI}) specification or using a STC-S format
+described on the section 6 of TAP 1.0 
+(\citealt{2011ivoa.spec.1028T}). In
 the WHERE clause, s\_region constraints will generally make use of ADQL
 geometries (CIRCLE, POLYGON, POINT) and the geometry predicate functions
 (CONTAINS, INTERSECTS).
@@ -554,9 +506,9 @@ of future observations with a previously download one).
 The planning exposure time (\textbf{t\_plan\_exptime}) has been added in order
 to show any possible inconsistency between the scheduled exposure time and the
 real performed exposure time (\textbf{t\_exptime}). If an observation was
-performed without problems, both quantities must be exactly the same. Any
-discrepancy between these two values will reflect problems or deviations between
-scheduled observations and performed observations.
+performed without problems, both quantities usually have the same values. Any
+discrepancy between these two values could reflect problems or deviations between
+scheduled observations and performed observations or a more accurate value.
 
 The \textbf{category} element has been added in order to help users to identify
 those observations that were scheduled in coordination with other facilities or
@@ -742,7 +694,7 @@ spect.resolution \\
 \hline
 %row no:18
 o\_ucd &
-CHAR(*) &
+(string) &
 &
 Char.ObservableAxis.ucd &
 meta.ucd \\
@@ -776,27 +728,35 @@ Provenance.ObsConfig.Instrument.name &
 meta.id;instr \\
 \hline
 %row no:23
+obs\_release\_date &
+(date) &
+&
+Curation.releaseDate &
+time.release;obs.exposure \\
+\hline
+%
+%row no:24
 t\_plan\_exptime &
 (float) &
 s &
 Char.TimeAxis.Coverage.Support.Extent &
 time.duration;obs.exposure \\
 \hline
-%row no:24
+%row no:25
 category &
 (string) &
 &
 &
 \\
 \hline
-%row no:25
+%row no:26
 priority &
 (integer) &
 &
 &
 \\
 \hline
-%row no:26
+%row no:27
 execution\_status &
 (string)&
 &
@@ -864,8 +824,8 @@ WHERE
 where the overlap pattern has been used for the spectral coordinate.
 Where ObsLocTAP services give coverage information in their Registry records,
 services outside of the spectral area of interest can already be skipped based
-on resource metadata. Filtering of services using registration metadata will be
-described into the TAP Registration Extension (TAPRegExt; \citealt{std:TAPREGEXT}) definition for ObsLocTAP services.
+on resource metadata. More info on registration of ObsLocTAP services is provided
+in section \ref{sec:Registering}.
 \par
 
 The values of the spectral coordinate should be defined, as per the ObsCore data
@@ -939,7 +899,7 @@ PKS 0736+017, with a radius of 1 arcmin.
 
 
 \section{Registering ObsLocTAP services}
-
+\label{sec:Registering}
 ObsLocTAP services are registered as VODataService CatalogResources. They MUST
 have one or more auxiliary TAP capabilities pointing to the TAP service(s) at
 which the ivoa.obsplan table can be queried. They furthermore MUST have a
