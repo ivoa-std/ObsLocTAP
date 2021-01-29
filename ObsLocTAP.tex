@@ -631,7 +631,7 @@ phys.angSize;instr.fov \\
 \hline
 %row no:9
 s\_region &
-(string) &
+(region) &
 &
 Char.SpatialAxis.Coverage.Support.Area &
 pos.outline;obs.field \\
@@ -768,7 +768,19 @@ execution\_status &
 \end{landscape}
 
 %%%%%%%%%%%%%%%%%%%% Table No: 4 ends here %%%%%%%%%%%%%%%%%%%%
-The concrete types in the TAP\_SCHEMA are up to the implementation; however, (float)-typed columns must contain floating point data (like DOUBLE PRECISION or REAL), (string)-typed columns must contain text (e.g, VARCHAR(n), CHAR(n)), and (integer)-typed columns must contain integers (e.g., INTEGER, BIGINT, SMALLINT).
+The concrete types used in the database and in table output are
+up to the implementation, but the data type annotations above
+must result in VOTable column output with {\tt datatype},
+{\tt xtype} and {\tt arraysize} attributes as follows:
+{\it (float)\/} means floating point values (numeric datatype);
+{\it (integer)\/} means integer values (integer datatype);
+{\it (string)\/} means string values (character datatype and a suitable arraysize);
+{\it (date)\/} means Timestamp string values as described in DALI,
+and
+{\it (region)\/} means {\em either\/} an STC-S-format string
+as described in section 6 of TAP 1.0,
+{\em or\/} one of the region encodings such as Circle or Polygon
+described in DALI.
 
 \vspace{\baselineskip}
 \section{Use Cases as TAP/ADQL queries}
