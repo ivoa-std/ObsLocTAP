@@ -23,7 +23,7 @@
 	http://www.ivoa.net/xml/VORegistry/v1.0          
 	http://www.ivoa.net/xml/VORegistry/v1.0                     
 	http://www.ivoa.net/xml/VODataService/v1.0       
-	http://www.ivoa.net/xml/VODataService/v1.0
+	http://www.ivoa.net/xml/VODataService/v1.0"
 	xsi:type="vs:CatalogService">
    <title>Integral Science Archive TAP</title>
    <shortName>ISLA</shortName>
