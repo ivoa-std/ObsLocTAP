@@ -18,7 +18,7 @@ AUTHOR_EMAIL=jesusjuansalgado@gmail.com
 
 # Source files for the TeX document (but the main file must always
 # be called $(DOCNAME).tex
-SOURCES = $(DOCNAME).tex
+SOURCES = $(DOCNAME).tex resource-example.xml
 
 # List of image files to be included in submitted package (anything that
 # can be rendered directly by common web browsers)
