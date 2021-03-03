@@ -486,12 +486,8 @@ present in the IVOA ObsCore standard (\citealt{2017ivoa.spec.0509L}).
 \textbf{\textit{s\_region}}, as described on IVOA ObsCore standard, can be
 used to precisely specify the covered spatial region of a data product. The
 s\_region geometrical field is allowed to be serialised according DALI 1.1
-(\citealt{std:DALI}) specification or using a STC-S format
-described on the section 6 of TAP 1.0 
-(\citealt{2011ivoa.spec.1028T}). In
-the WHERE clause, s\_region constraints will generally make use of ADQL
-geometries (CIRCLE, POLYGON, POINT) and the geometry predicate functions
-(CONTAINS, INTERSECTS).
+(\citealt{std:DALI11}) specification, as referenced on TAP 1.1, or using a STC-S format described on the section 6 of TAP 1.0 
+(\citealt{2011ivoa.spec.1028T}). In the WHERE clause, s\_region constraints will generally make use of ADQL geometries (CIRCLE, POLYGON, POINT) and the geometry predicate functions (CONTAINS, INTERSECTS).
 
 In case the exact final region cannot be specified (e.g., because an undefined
 position angle of the planned observation), s\_region can be approximated by
@@ -561,8 +557,7 @@ instruments or configurations used so the metadata should be present as follows:
 The primary access path to ObsLocTAP information is through TAP
 (\citealt{2010ivoa.spec.0327D}) database queries. In order to fulfill some advanced
 use cases, ObsLocTAP services MUST provide, at least, the following ADQL
-(\citealt{2008ivoa.spec.1030O}) geometrical features: CIRCLE, POLYGON, INTERSECTS
-and CONTAINS.\par
+(\citealt{2008ivoa.spec.1030O}) geometrical features: CIRCLE, POLYGON, POINT, INTERSECTS and CONTAINS.\par
 
 \subsection{TAP Schema}
 The following table gives the entries for the ivoa.obsplan table in
