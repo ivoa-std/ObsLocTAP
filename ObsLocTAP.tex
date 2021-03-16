@@ -418,7 +418,7 @@ Stop time in MJD &
 %row no:13
 t\_exptime &
 Total exposure time &
-\\
+\makecell[l]{not null for execution\_status \\ Scheduled or Performed} \\
 \hline
 %row no:14
 t\_resolution &
@@ -563,10 +563,12 @@ The same approach of hidden information status could also be applied to the
 instruments or configurations used so the metadata should be present as follows:
 
 \begin{itemize}
-	\item{For confidential observations that requires some metadata to be hidden
-	 from the planning point of view, the minimal metadata to be shown for
-	 "Scheduled" and "Performed" metadata is the allocation of the time so
-	 it can be shown that this period has been blocked for a certain observation.
+	\item{For observations that requires some metadata to be hidden from the
+	 planning point of view, (e.g. the policy of a certain observatory is to
+	 hide the astronomical target of certain private proposals) the minimal
+	 metadata to be shown for "Scheduled" and "Performed" observations is the
+	 time coverage so it is shown that this period has been blocked for a
+	 certain observation.
 	 That means that an entry should appear with a defined start time, end time
 	 and duration as relevant. The facility name should also be provided.}
 	 
