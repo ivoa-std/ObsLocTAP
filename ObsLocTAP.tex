@@ -546,12 +546,15 @@ therefore cannot be removed from the planning or are hard to re-schedule. If the
 observation can be easily shifted to a different time (value=0), the user could
 query the service to identify this type of observations.
 
-Execution status (\textbf{execution\_status}) provides a description of the current status of the planned observation. Initially, observations are inserted
-as "Planned" into the system. Once the time when the observation is going to be
-executed is defined, the status changes to "Scheduled". A possible "Unscheduled" status is possible if the observation is removed from the planning due to any 
-possible operations decision. The final state will be one of "Performed" or "Aborted". "Aborted" and "Unscheduled" observations could be removed from the
-planning table or they could return to the "Planned" status for a possible
-future schedule.
+Execution status (\textbf{execution\_status}) provides a description of the
+current status of the planned observation. Initially, observations are
+inserted as "Planned" into the system. Once the time when the observation is
+going to be executed is defined, the status changes to "Scheduled". A possible
+"Unscheduled" status is possible if the observation is removed from the planning
+due to any possible operations decision. The final state will be one of
+"Performed" or "Aborted". "Aborted" and "Unscheduled" observations could be
+removed from the planning table or they could return to the "Planned" status
+for a possible future schedule.
 
 \subsection{Compulsory metadata}
 In contrast to normal ObsTAP services where most of the metadata is compulsory,
