@@ -10,6 +10,7 @@
 \usepackage{float}
 \usepackage{adjustbox}
 \usepackage{lscape}
+\usepackage{makecell}
 
 \usepackage[english]{babel}
 
@@ -352,125 +353,153 @@ is reduced to:
 \begin{landscape}
 \begin{table}
 \def\hlstrut{\vrule height 13pt depth5pt width0pt}
-\begin{tabular}{ |l|l|l|l| }
+\begin{tabular}{ |l|l|l| }
 \hline
 \hlstrut\textbf{Column Name} &
-\hlstrut\textbf{Description} \\
+\hlstrut\textbf{Description} &
+\hlstrut\textbf{Constraint} \\
 \hline
 %row no:2
 t\_planning &
 Time in MJD when this observation has been added or modified into the
-planning log \\
+planning log &
+not null\\
 \hline
 %row no:3
 target\_name &
-Astronomical object observed, if any \\
+Astronomical object observed, if any &
+\\
 \hline
 %row no:4
 obs\_id &
-Observation ID \\
+Observation ID &
+not null\\
 \hline
 %row no:5
 obs\_collection &
-Name of the data collection \\
+Name of the data collection &
+\\
 \hline
 %row no:6
 s\_ra &
-Central right ascension, ICRS \\
+Central right ascension, ICRS &
+\\
 \hline
 %row no:7
 s\_dec &
-Central declination, ICRS \\
+Central declination, ICRS &
+\\
 \hline
 %row no:8
 s\_fov  &
-Diameter (bounds) of the covered region \\
+Diameter (bounds) of the covered region &
+\\
 \hline
 %row no:9
 s\_region &
-Sky region covered by the data product (expressed in ICRS frame) \\
+Sky region covered by the data product (expressed in ICRS frame) &
+\\
 \hline
 %row no:10
 s\_resolution &
-Spatial resolution of data as FWHM \\
+Spatial resolution of data as FWHM &
+\\
 \hline
 %row no:11
 t\_min &
-Start time in MJD \\
+Start time in MJD &
+\makecell[l]{not null for execution\_status \\ Scheduled or Performed} \\
 \hline
 %row no:12
 t\_max &
-Stop time in MJD \\
+Stop time in MJD &
+\makecell[l]{not null for execution\_status \\ Scheduled or Performed} \\
 \hline
 %row no:13
 t\_exptime &
-Total exposure time \\
+Total exposure time &
+\\
 \hline
 %row no:14
 t\_resolution &
-Temporal resolution FWHM \\
+Temporal resolution FWHM &
+\\
 \hline
 %row no:15
 em\_min &
-Start in spectral coordinates \\
+Start in spectral coordinates &
+\\
 \hline
 %row no:16
 em\_max &
-Stop in spectral coordinates \\
+Stop in spectral coordinates &
+\\
 \hline
 %row no:17
 em\_res\_power &
-Spectral resolving power \\
+Spectral resolving power &
+\\
 \hline
 %row no:18
 o\_ucd &
-UCD of observable (e.g., phot.flux.density, phot.count, etc.) \\
+UCD of observable (e.g., phot.flux.density, phot.count, etc.) &
+\\
 \hline
 %row no:19
 pol\_states &
-List of polarization states or NULL if not applicable \\
+List of polarization states or NULL if not applicable &
+\\
 \hline
 %row no:20
 pol\_xel &
-Number of polarization samples \\
+Number of polarization samples &
+\\
 \hline
 %row no:21
 facility\_name &
-Name of the facility used for this observation \\
+Name of the facility used for this observation &
+not null\\
 \hline
 %row no:22
 instrument\_name &
-Name of the instrument used for this observation \\
+Name of the instrument used for this observation &
+\\
 \hline
 %row no:23
 obs\_release\_date &
-Observation release date (ISO 8601) \\
+Observation release date (ISO 8601) &
+\\
 \hline
 %row no:24
 t\_plan\_exptime &
-Planned or scheduled exposure time \\
+Planned or scheduled exposure time &
+\\
 \hline
 %row no:25
 category &
 Observation category. One of the following values: Fixed, Coordinated, Window, 
-Other \\
+Other &
+not null\\
 \hline
 %row no:26
 priority &
-Priority level $ \{ $ 0, 1, 2$ \} $ \\
+Priority level $ \{ $ 0, 1, 2$ \} $ &
+not null\\
 \hline
 %row no:27
 execution\_status &
-One of the following values:  Planned, Scheduled, Unscheduled, Performed, Aborted \\
+One of the following values:  Planned, Scheduled, Unscheduled, Performed, Aborted &
+not null\\
 \hline
 \end{tabular}
 \end{table}
 \end{landscape}
 
 %%%%%%%%%%%%%%%%%%%% Table No: 3 ends here %%%%%%%%%%%%%%%%%%%%
-The obsplan table exposed by an ObsLocTAP service MUST include all 
-the columns listed, even though null values may be permitted in some
-of the columns. Additional non-standard columns are permitted in a 
+ObsLocTAP services are TAP services that expose a table called obsplan. This
+is a mandatory feature. The obsplan table exposed by an ObsLocTAP service MUST
+include all  the columns listed, even though null values may be permitted in
+some of the columns. Additional non-standard columns are permitted in a 
 particular obsplan table implementation.
 
 The purpose of the observation locator query is to allow users/clients to
@@ -517,9 +546,12 @@ therefore cannot be removed from the planning or are hard to re-schedule. If the
 observation can be easily shifted to a different time (value=0), the user could
 query the service to identify this type of observations.
 
-Execution status (\textbf{execution\_status}) provides a description of the current status of the planned
-observation. Initially, observations are inserted as planned into the system.
-The final state will be one of executed or aborted.
+Execution status (\textbf{execution\_status}) provides a description of the current status of the planned observation. Initially, observations are inserted
+as "Planned" into the system. Once the time when the observation is going to be
+executed is defined, the status changes to "Scheduled". A possible "Unscheduled" status is possible if the observation is removed from the planning due to any 
+possible operations decision. The final state will be one of "Performed" or "Aborted". "Aborted" and "Unscheduled" observations could be removed from the
+planning table or they could return to the "Planned" status for a possible
+future schedule.
 
 \subsection{Compulsory metadata}
 In contrast to normal ObsTAP services where most of the metadata is compulsory,
@@ -531,11 +563,13 @@ The same approach of hidden information status could also be applied to the
 instruments or configurations used so the metadata should be present as follows:
 
 \begin{itemize}
-	\item{For confidential observations that need to be hidden from the planning
-  point of view, the period should be shown as blocked. That means that an entry
-  should appear with the start time, end time and duration as relevant. The
-  facility name should also be provided.}
-
+	\item{For confidential observations that requires some metadata to be hidden
+	 from the planning point of view, the minimal metadata to be shown for
+	 "Scheduled" and "Performed" metadata is the allocation of the time so
+	 it can be shown that this period has been blocked for a certain observation.
+	 That means that an entry should appear with a defined start time, end time
+	 and duration as relevant. The facility name should also be provided.}
+	 
 	\item{If the astronomical target is still hidden, coordinates and target
   should be set to \textit{null} in the obsplan table.}
 
