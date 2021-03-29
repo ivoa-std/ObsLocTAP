@@ -465,23 +465,23 @@ instrument\_name &
 Name of the instrument used for this observation &
 \\
 \hline
-%row no:24
+%row no:23
 t\_plan\_exptime &
 Planned or scheduled exposure time &
 \\
 \hline
-%row no:25
+%row no:24
 category &
 Observation category. One of the following values: Fixed, Coordinated, Window, 
 Other &
 not null\\
 \hline
-%row no:26
+%row no:25
 priority &
 Priority level $ \{ $ 0, 1, 2$ \} $ &
 not null\\
 \hline
-%row no:27
+%row no:26
 execution\_status &
 One of the following values:  Planned, Scheduled, Unscheduled, Performed, Aborted &
 not null\\
@@ -758,28 +758,28 @@ Provenance.ObsConfig.Instrument.name &
 meta.id;instr \\
 \hline
 %
-%row no:24
+%row no:23
 t\_plan\_exptime &
 (float) &
 s &
 Char.TimeAxis.Coverage.Support.Extent &
 time.duration;obs.exposure \\
 \hline
-%row no:25
+%row no:24
 category &
 (string) &
 &
 &
 \\
 \hline
-%row no:26
+%row no:25
 priority &
 (integer) &
 &
 &
 \\
 \hline
-%row no:27
+%row no:26
 execution\_status &
 (string)&
 &
@@ -798,7 +798,6 @@ must result in VOTable column output with {\tt datatype},
 {\it (float)\/} means floating point values (numeric datatype);
 {\it (integer)\/} means integer values (integer datatype);
 {\it (string)\/} means string values (character datatype and a suitable arraysize);
-{\it (date)\/} means Timestamp string values as described in DALI,
 and
 {\it (region)\/} means {\em either\/} an STC-S-format string
 as described in section 6 of TAP 1.0,
