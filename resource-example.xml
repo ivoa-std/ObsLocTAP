@@ -1,18 +1,9 @@
 <ri:Resource 
 	xmlns:ri="http://www.ivoa.net/xml/RegistryInterface/v1.0" 
-	xmlns:cea="http://www.ivoa.net/xml/CEA/v1.0rc1" 
-	xmlns:ceab="http://www.ivoa.net/xml/CEA/base/v1.0" 
-	xmlns:cs="http://www.ivoa.net/xml/ConeSearch/v1.0" 
 	xmlns:oai="http://www.openarchives.org/OAI/2.0/" 
-	xmlns:stap="urn:astrogrid:schema:vo-resource-types:STAP:v1.0" 
-	xmlns:stc="http://www.ivoa.net/xml/STC/stc-v1.30.xsd" 
-	xmlns:tap10="http://www.ivoa.net/xml/TAPRegExt/v1.0" 
 	xmlns:tr="http://www.ivoa.net/xml/TAPRegExt/v1.0" 
-	xmlns:vg="http://www.ivoa.net/xml/VORegistry/v1.0" 
 	xmlns:vr="http://www.ivoa.net/xml/VOResource/v1.0" 
 	xmlns:vs="http://www.ivoa.net/xml/VODataService/v1.1" 
-	xmlns:vstd="http://www.ivoa.net/xml/StandardsRegExt/v1.0" 
-	xmlns:xlink="http://www.w3.org/1999/xlink" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	created="2016-09-14T08:31:55" status="active" 
 	updated="2021-01-18T18:51:10.960" 
@@ -22,8 +13,10 @@
 	http://www.ivoa.net/xml/VOResource/v1.0                     
 	http://www.ivoa.net/xml/VORegistry/v1.0          
 	http://www.ivoa.net/xml/VORegistry/v1.0                     
-	http://www.ivoa.net/xml/VODataService/v1.0       
-	http://www.ivoa.net/xml/VODataService/v1.0"
+	http://www.ivoa.net/xml/TAPRegExt/v1.0
+	http://www.ivoa.net/xml/TAPRegExt/v1.0
+	http://www.ivoa.net/xml/VODataService/v1.1       
+	http://www.ivoa.net/xml/VODataService/v1.1"
 	xsi:type="vs:CatalogService">
    <title>Integral Science Archive TAP</title>
    <shortName>ISLA</shortName>
@@ -134,7 +127,9 @@
         <dataType arraysize="*" xsi:type="vs:VOTableType">char</dataType>
         <flag>indexed</flag>
       </column>
+<!--
 ... more columns ...
+-->
       <column>
         <name>execution_status</name>
         <description>Execution status provides a description of the current status
