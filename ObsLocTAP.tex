@@ -136,7 +136,7 @@ as ObsCore itself, relies on the TAP specification to deploy its relational cont
 Also, queries are written following ADQL as the query language and the default result is defined
 in VOTable format, including units in a VOUnits compatible format, UCDs to
 describe columns and Identifiers to point to the data model. Finally, ObsLocTAP
-services can be registered making use of the VODataService standard format.
+services can be registered by making use of the VODataService standard format.
 
 \pagebreak
 
@@ -212,7 +212,7 @@ and ADQL the query language syntax.
 
 \section{Use cases}
 The planning process can be usually described as follows (although observatories
-can have different procedures to fulfill this process):
+can have different procedures to fulfil this process):
 
 \begin{itemize}
 	\item{The observatory receives observatory proposals from scientists that are
@@ -316,19 +316,19 @@ describe the data model behind most of the use cases needed to discover observed
 datasets:
 
 \begin{itemize}
-	\item{Characterization: Provides a description of metadata associated to a
+	\item{Characterization: Provides a description of metadata associated with a
   certain observation. In particular, the different axes (e.g., the spatial
   axis, the time axis, spectral axis$ \ldots $ ) are used to describe the
   coverage of the observation on different observables.}
 
-	\item{ObsDataSet: Provides support to discover data associated to a certain
+	\item{ObsDataSet: Provides support to discover data associated with a certain
   performed observation.}
 
 \end{itemize}
 
 In the case of planned (not executed) observations, only the Characterization
 DM could be used, as the observations covered are not yet performed and hence
-most of the metadata associated to the ObsDataSet will be empty. Also, the data
+most of the metadata associated with the ObsDataSet will be empty. Also, the data
 produced after the processing of the observational metadata could be not present
 yet for recently executed observations and, in other cases, data could be
 present only within the mission archive but not in the planning system.
@@ -509,7 +509,7 @@ present in the IVOA ObsCore standard (\citealt{2017ivoa.spec.0509L}).
 
 \textbf{\textit{s\_region}}, as described on IVOA ObsCore standard, can be
 used to precisely specify the covered spatial region of a data product. The
-s\_region geometrical field is allowed to be serialised according DALI 1.1
+s\_region geometrical field is allowed to be serialised according to DALI 1.1
 (\citealt{std:DALI11}) specification, as referenced on TAP 1.1, or using a STC-S format described on the section 6 of TAP 1.0 
 (\citealt{2011ivoa.spec.1028T}). In the WHERE clause, s\_region constraints will generally make use of ADQL geometries (CIRCLE, POLYGON, POINT) and the geometry predicate functions (CONTAINS, INTERSECTS).
 
@@ -554,7 +554,7 @@ for a possible future schedule.
 \subsection{Compulsory metadata}
 In contrast to normal ObsTAP services where most of the metadata is compulsory,
 in the case of ObsLocTAP, this cannot always be maintained. In some cases, the
-target associated to the observations could still be confidential information
+target associated with the observations could still be confidential information
 which needs to be hidden due to, e.g., observatory confidentiality constraints.
 
 The same approach of hidden information status could also be applied to the
@@ -589,7 +589,7 @@ instruments or configurations used so the metadata should be present as follows:
 
 \subsection{Implementation of ObsLocTAP as a TAP service}
 The primary access path to ObsLocTAP information is through TAP
-(\citealt{2010ivoa.spec.0327D}) database queries. In order to fulfill some advanced
+(\citealt{2010ivoa.spec.0327D}) database queries. In order to fulfil some advanced
 use cases, ObsLocTAP services MUST provide, at least, the following ADQL
 (\citealt{2008ivoa.spec.1030O}) geometrical features: CIRCLE, POLYGON, POINT, INTERSECTS and CONTAINS.\par
 
