@@ -487,6 +487,8 @@ One of the following values:  Planned, Scheduled, Unscheduled, Performed, Aborte
 not null\\
 \hline
 \end{tabular}
+\caption{ObsPlan columns description}
+\label{tab:obsplancolumns}
 \end{table}
 \end{landscape}
 
@@ -509,8 +511,9 @@ present in the IVOA ObsCore standard (\citealt{2017ivoa.spec.0509L}).
 
 \textbf{\textit{s\_region}}, as described on IVOA ObsCore standard, can be
 used to precisely specify the covered spatial region of a data product. The
-s\_region geometrical field is allowed to be serialised according to DALI 1.1
-(\citealt{std:DALI11}) specification, as referenced on TAP 1.1, or using a STC-S format described on the section 6 of TAP 1.0 
+s\_region geometrical field is allowed to be serialised according to DALI
+(\citealt{std:DALI11} at this stage but, also, future DALI evolutions) specification, as referenced e.g. on TAP 1.1, or using a STC-S format
+described on the section 6 of TAP 1.0 
 (\citealt{2011ivoa.spec.1028T}). In the WHERE clause, s\_region constraints will generally make use of ADQL geometries (CIRCLE, POLYGON, POINT) and the geometry predicate functions (CONTAINS, INTERSECTS).
 
 In case the exact final region cannot be specified (e.g., because an undefined
@@ -612,7 +615,7 @@ TAP\_SCHEMA.columns
 \hline
 %row no:2
 t\_planning &
-(float) &
+(real) &
 d &
 &
 \\
@@ -640,21 +643,21 @@ meta.id \\
 \hline
 %row no:6
 s\_ra &
-(float) &
+(real) &
 deg &
 Char.SpatialAxis.Coverage.Location.Coord.Position2D.Value2.C1 &
 pos.eq.ra \\
 \hline
 %row no:7
 s\_dec &
-(float) &
+(real) &
 deg &
 Char.SpatialAxis.Coverage.Location.Coord.Position2D.Value2.C2 &
 pos.eq.dec \\
 \hline
 %row no:8
 s\_fov &
-(float) &
+(real) &
 deg &
 Char.SpatialAxis.Coverage.Bounds.Extent.diameter &
 phys.angSize;instr.fov \\
@@ -668,56 +671,56 @@ pos.outline;obs.field \\
 \hline
 %row no:10
 s\_resolution &
-(float) &
+(real) &
 arcsec &
 Char.SpatialAxis.Resolution.Refval.value &
 pos.angResolution \\
 \hline
 %row no:11
 t\_min &
-(float) &
+(real) &
 d &
 Char.TimeAxis.Coverage.Bounds.Limits.StartTime &
 time.start;obs.exposure \\
 \hline
 %row no:12
 t\_max &
-(float) &
+(real) &
 d &
 Char.TimeAxis.Coverage.Bounds.Limits.StopTime &
 time.end;obs.exposure \\
 \hline
 %row no:13
 t\_exptime &
-(float) &
+(real) &
 s &
 Char.TimeAxis.Coverage.Support.Extent &
 time.duration;obs.exposure \\
 \hline
 %row no:14
 t\_resolution &
-(float) &
+(real) &
 s &
 Char.TimeAxis.Resolution.Refval.value &
 time.resolution \\
 \hline
 %row no:15
 em\_min &
-(float) &
+(real) &
 m &
 Char.SpectralAxis.Coverage.Bounds.Limits.LoLimit &
 em.wl;stat.min \\
 \hline
 %row no:16
 em\_max &
-(float) &
+(real) &
 m &
 Char.SpectralAxis.Coverage.Bounds.Limits.HiLimit &
 em.wl;stat.max \\
 \hline
 %row no:17
 em\_res\_power &
-(float) &
+(real) &
 &
 Char.SpectralAxis.Resolution.ResolPower.refVal &
 spect.resolution \\
@@ -760,7 +763,7 @@ meta.id;instr \\
 %
 %row no:23
 t\_plan\_exptime &
-(float) &
+(real) &
 s &
 Char.TimeAxis.Coverage.Support.Extent &
 time.duration;obs.exposure \\
@@ -787,6 +790,8 @@ execution\_status &
 \\
 \hline
 \end{tabular}
+\caption{TAP Schema description}
+\label{tab:tapschema}
 \end{table}
 \end{landscape}
 
@@ -795,7 +800,7 @@ The concrete types used in the database and in table output are
 up to the implementation, but the data type annotations above
 must result in VOTable column output with {\tt datatype},
 {\tt xtype} and {\tt arraysize} attributes as follows:
-{\it (float)\/} means floating point values (numeric datatype);
+{\it (real)\/} means floating point values (numeric datatype);
 {\it (integer)\/} means integer values (integer datatype);
 {\it (string)\/} means string values (character datatype and a suitable arraysize);
 and
