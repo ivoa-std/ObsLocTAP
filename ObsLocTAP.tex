@@ -37,27 +37,30 @@
 \author{Jesús Salgado}
 \author{Matthias Ehle}
 \author{Carlos Gabriel}
-\author{James Dempsey}
-\author{Markus Demleitner}
-\author{María Díaz Trigo}
-\author{Karl Foster}
-\author{Jaime Kennea}
-\author{Mark Kettenis}
 \author{Peter Kretschmar}
 \author{Erik Kuulkers}
-\author{Giorgio Matt}
 \author{Bruno Merín}
-\author{Marco Molinaro}
 \author{Jan-Uwe Ness}
+\author{Emilio Salazar}
+\author{Richard Saxton}
+
+\author{Baptiste Cecconi}
+\author{Karl Foster}
+\author{Markus Demleitner}
+\author{James Dempsey}
+\author{Marco Molinaro}
+\author{Celia Sánchez}
+\author{Mark Taylor}
+
+\author{María Díaz Trigo}
+\author{Jaime Kennea}
+\author{Mark Kettenis}
+\author{Giorgio Matt}
 \author{Julian Osborne}
 \author{Emma de Oña Wilhelmi}
 \author{Edward J. Salbol}
-\author{Emilio Salazar}
-\author{Celia Sánchez}
-\author{Richard Saxton}
 \author{Gregory Sivakoff}
 \author{Lian Tao}
-\author{Mark Taylor}
 \author{Aaron Tohuvavohu}
 \author{Bill Workman}
 
@@ -488,7 +491,8 @@ not null\\
 \hline
 %row no:27
 tracking\_type &
-One of the following values:  RA/Dec, solar-system-object-tracking, transit-mode &
+One of the following values:  sidereal, solar-system-object-tracking, 
+fixed-az-el-transit &
 Optional field\\
 \hline
 \end{tabular}
@@ -561,24 +565,26 @@ for a possible future schedule.
 
 Tracking type (\textbf{tracking\_type}) is an optional field of the obsplan table
 to characterize the tracking foreseen during the observation execution.  
-The default value would be \textbf{RA/Dec}. 
-For this observations the pointing is mantained on the same position on the sky
-during all the observation period. This kind of tracking is usually known as
-siderial tracking for ground based observations. 
+If not specified, the default value would be \textbf{sidereal}. 
+For these observations the pointing is mantained on the same position on the sky
+during all the observation period.
 
 Other possible value is \textbf{solar-system-object-tracking}, to be used when
 the pointing of the observatory varies to maintain the selected solar system
-target on the same position of the observatory point of view. In this case, the
+target or any other moving object within the observatory field of view on the
+same position of the observatory point of view. In this case, the
 values for \textbf{s\_ra} and \textbf{s\_dec} could be defined as null or,
 if possible, a representative position within the expected siderial movement.
 In this case, \textbf{target\_name} would be an identifier of the solar system
-object.
+or moving object.
 
-The third possible value is \textbf{transit-mode}, to be used when the
-observatory points to a fixed position on the sky where a certain moving target
-will cross the field of view. \textbf{s\_ra} and \textbf{s\_dec} would
-content the value of the fixed position and \textbf{target\_name} would be
+The third possible value is \textbf{fixed-az-el-transit}, to be used when the
+observatory points to a fixed position in local azimuth-elevation coordinates,
+allowing for a target to cross the field of view. \textbf{s\_ra} and 
+\textbf{s\_dec} would contain the value of the sidereal pointing at the time
+of the transit of the named target in \textbf{target\_name}, which would be
 an identifier of the object to be observed.
+
 
 
 \subsection{Compulsory metadata}
