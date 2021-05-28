@@ -37,27 +37,30 @@
 \author{Jesús Salgado}
 \author{Matthias Ehle}
 \author{Carlos Gabriel}
-\author{James Dempsey}
-\author{Markus Demleitner}
-\author{María Díaz Trigo}
-\author{Karl Foster}
-\author{Jaime Kennea}
-\author{Mark Kettenis}
 \author{Peter Kretschmar}
 \author{Erik Kuulkers}
-\author{Giorgio Matt}
 \author{Bruno Merín}
-\author{Marco Molinaro}
 \author{Jan-Uwe Ness}
+\author{Emilio Salazar}
+\author{Richard Saxton}
+
+\author{Baptiste Cecconi}
+\author{Karl Foster}
+\author{Markus Demleitner}
+\author{James Dempsey}
+\author{Marco Molinaro}
+\author{Celia Sánchez}
+\author{Mark Taylor}
+
+\author{María Díaz Trigo}
+\author{Jaime Kennea}
+\author{Mark Kettenis}
+\author{Giorgio Matt}
 \author{Julian Osborne}
 \author{Emma de Oña Wilhelmi}
 \author{Edward J. Salbol}
-\author{Emilio Salazar}
-\author{Celia Sánchez}
-\author{Richard Saxton}
 \author{Gregory Sivakoff}
 \author{Lian Tao}
-\author{Mark Taylor}
 \author{Aaron Tohuvavohu}
 \author{Bill Workman}
 
@@ -486,6 +489,12 @@ execution\_status &
 One of the following values:  Planned, Scheduled, Unscheduled, Performed, Aborted &
 not null\\
 \hline
+%row no:27
+tracking\_type &
+One of the following values:  sidereal, solar-system-object-tracking, 
+fixed-az-el-transit &
+Optional field\\
+\hline
 \end{tabular}
 \caption{ObsPlan columns description}
 \label{tab:obsplancolumns}
@@ -553,6 +562,30 @@ due to any possible operations decision. The final state will be one of
 "Performed" or "Aborted". "Aborted" and "Unscheduled" observations could be
 removed from the planning table or they could return to the "Planned" status
 for a possible future schedule.
+
+Tracking type (\textbf{tracking\_type}) is an optional field of the obsplan table
+to characterize the tracking foreseen during the observation execution.  
+If not specified, the default value would be \textbf{sidereal}. 
+For these observations the pointing is mantained on the same position on the sky
+during all the observation period.
+
+Other possible value is \textbf{solar-system-object-tracking}, to be used when
+the pointing of the observatory varies to maintain the selected solar system
+target or any other moving object within the observatory field of view on the
+same position of the observatory point of view. In this case, the
+values for \textbf{s\_ra} and \textbf{s\_dec} could be defined as null or,
+if possible, a representative position within the expected siderial movement.
+In this case, \textbf{target\_name} would be an identifier of the solar system
+or moving object.
+
+The third possible value is \textbf{fixed-az-el-transit}, to be used when the
+observatory points to a fixed position in local azimuth-elevation coordinates,
+allowing for a target to cross the field of view. \textbf{s\_ra} and 
+\textbf{s\_dec} would contain the value of the sidereal pointing at the time
+of the transit of the named target in \textbf{target\_name}, which would be
+an identifier of the object to be observed.
+
+
 
 \subsection{Compulsory metadata}
 In contrast to normal ObsTAP services where most of the metadata is compulsory,
@@ -784,6 +817,13 @@ priority &
 \hline
 %row no:26
 execution\_status &
+(string)&
+&
+&
+\\
+\hline
+%row no:24
+tracking\_type &
 (string)&
 &
 &
@@ -1043,6 +1083,11 @@ Clients probably want to make sure they only query one access url per ivoid
 \multicolumn{1}{|p{3.75in}}{Add operations group TCG review suggestions} &
 \multicolumn{1}{|p{0.72in}}{All} &
 \multicolumn{1}{|p{0.9in}|}{{\fontsize{10pt}{12.0pt}\selectfont PR-20210329}} \\
+%row no:18
+\multicolumn{1}{|p{3.75in}}{Add comments from TCG review suggestions, including
+Solar System IG, GWS WG, Registry WG and TCG chair} &
+\multicolumn{1}{|p{0.72in}}{All} &
+\multicolumn{1}{|p{0.9in}|}{{\fontsize{10pt}{12.0pt}\selectfont PR-20210528}} \\
 
 \hline
 \end{tabular}
