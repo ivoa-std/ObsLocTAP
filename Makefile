@@ -26,7 +26,7 @@ FIGURES = role_diagram.svg media/observations_workflow.png
 
 # List of PDF figures (figures that must be converted to pixel images to
 # work in web browsers).
-VECTORFIGURES = role_diagram.pdf
+VECTORFIGURES =
 
 # Additional files to distribute (e.g., CSS, schema files, examples...)
 AUX_FILES =
