@@ -7,7 +7,7 @@ DOCNAME = ObsLocTAP
 DOCVERSION = 1.0
 
 # Publication date, ISO format; update manually for "releases"
-DOCDATE = 2020-05-14
+DOCDATE = 2021-07-23
 
 # What is it you're writing: NOTE, WD, PR, REC, PEN, or EN
 DOCTYPE = PR
