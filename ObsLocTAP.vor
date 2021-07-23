@@ -1,0 +1,99 @@
+<ri:Resource 
+	xsi:type="vstd:Standard" 
+	created="2021-07-23T06:43:00" 
+	updated="2021-07-23T06:43:00" 
+	status="active"
+	xmlns:vr="http://www.ivoa.net/xml/VOResource/v1.0" 
+	xmlns:vstd="http://www.ivoa.net/xml/StandardsRegExt/v1.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:ri="http://www.ivoa.net/xml/RegistryInterface/v1.0"
+	xsi:schemaLocation="http://www.ivoa.net/xml/VOResource/v1.0
+		http://www.ivoa.net/xml/VOResource/v1.0
+	http://www.ivoa.net/xml/StandardsRegExt/v1.0
+		http://www.ivoa.net/xml/StandardsRegExt/v1.0
+	http://www.ivoa.net/xml/VOResource/v1.0
+		http://www.ivoa.net/xml/VOResource/v1.0">
+
+  <title>Observation Locator Table Access Protocol</title>
+  <shortName>ObsLocTAP</shortName>
+  <identifier>ivo://ivoa.net/std/obsloctap</identifier> 
+  <!-- <altIdentifier>doi:Look up on ADS once your standard has made
+    it there and then update this. </altIdentifier> -->
+  <curation>
+    <publisher>IVOA</publisher>
+
+    <creator><name>Ibarra, Aitor</name></creator>
+    <creator><name>Salgado, Jesús</name></creator>
+    <creator><name>Ehle, Matthias</name></creator>
+    <creator><name>Gabriel, Carlos</name></creator>
+    <creator><name>Kretschmar, Peter</name></creator>
+    <creator><name>Kuulkers, Erik</name></creator>
+    <creator><name>Merín, Bruno</name></creator>
+    <creator><name>Ness, Jan-Uwe</name></creator>
+    <creator><name>Salazar, Emilio</name></creator>
+    <creator><name>Saxton, Richard</name></creator>
+    <creator><name>Cecconi, Baptiste</name></creator>
+    <creator><name>Foster, Karl</name></creator>
+    <creator><name>Demleitner, Markus</name></creator>
+    <creator><name>Dempsey, James</name></creator>
+    <creator><name>Molinaro, Marco</name></creator>
+    <creator><name>Sánchez, Celia</name></creator>
+    <creator><name>Taylor, Mark</name></creator>
+    <creator><name>Trigo, María Díaz</name></creator>
+    <creator><name>Kennea, Jaime</name></creator>
+    <creator><name>Kettenis, Mark</name></creator>
+    <creator><name>Matt, Giorgio</name></creator>
+    <creator><name>Osborne, Julian</name></creator>
+    <creator><name>de Oña Wilhelmi, Emma</name></creator>
+    <creator><name>Salbol, Edward J.</name></creator>
+    <creator><name>Sivakoff, Gregory</name></creator>
+    <creator><name>Tao, Lian</name></creator>
+    <creator><name>Tohuvavohu, Aaron</name></creator>
+    <creator><name>Workman, Bill</name></creator>
+
+    <date role="update">2021-07-23</date>
+    <version>1.0</version>
+    <contact>
+      <name>IVOA Data Model Working Group</name>
+      <email>dm@ivoa.net</email>
+    </contact>
+  </curation>
+  <content>
+    <subject>virtual-observatories</subject>
+    <subject>observatories</subject>
+
+    <description>
+    	The Observation Locator Table Access Protocol (ObsLocTAP) defines a data
+    	model for scheduled observations and a method to run queries over
+    	compliant data, using several Virtual Observatory technologies.
+
+      The data model builds on the ObsCore data model, removing elements
+      associated with dataset access that are not available during the planning
+      phase. In this way, this standard is focused on access to metadata
+      related to the planning of a certain observatory, more than on access to
+      the scientific data products. Also, the data model will be focused on
+      discovery of planned observations, which is very useful information for
+      multi-wavelength coordination observations, re-planning information
+      propagation, follow-up of Targets of Opportunity alerts, preparation of
+      proposals, etc.
+
+      As with ObsCore, a serialisation into a relational table is defined,
+      which allows users to run complex queries using the IVOA Table Access
+      Protocol. The document also prescribes how to register and discover
+      ObsLocTAP services. 
+    </description>
+    <referenceURL>http://ivoa.net/documents/ObsLocTAP/</referenceURL>
+    <type>Other</type>
+  	<contentLevel>Research</contentLevel>
+  </content>
+
+  <endorsedVersion status="rec">1.0</endorsedVersion>
+
+	<key>
+		<name>table-1.0</name>
+		<description>The table schema as defined by version 1.0 of
+		the recommendation.
+		</description>
+	</key>
+
+</ri:Resource>
