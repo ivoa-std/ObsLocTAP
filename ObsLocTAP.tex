@@ -134,7 +134,7 @@ infrastructure that enable VO applications.
 
 %%%%%%%%%%%%%%%%%%%% Figure/Image No: 1 Ends here %%%%%%%%%%%%%%%%%%%%
 Fig.~\ref{fig:archdiag} shows the role ObsLocTAP plays within the
-IVOA architecture \citep{note:VOARCH}. ObsLocTAP reuses various model elements (including geometrical entities) of ObsCore and, 
+IVOA architecture \citep{note:VOARCH}. ObsLocTAP reuses various model elements (including geometrical entities) of ObsCore and,
 as ObsCore itself, relies on the TAP specification to deploy its relational content.
 Also, queries are written following ADQL as the query language and the default result is defined
 in VOTable format, including units in a VOUnits compatible format, UCDs to
@@ -174,14 +174,14 @@ follows:
 	observation can be executed. Also, some changes could be expected on
   coordinates (due to some refinement) and other fields.}
 
-	\item{\textbf{Unscheduled}: the observation has been removed from the schedule.   	     
+	\item{\textbf{Unscheduled}: the observation has been removed from the schedule.
 	The observation could be recovered as planned into the planning log.}
 
 	\item{\textbf{Performed}: the observation has been performed successfully.
   This is only at the operational level as there is not guarantee of scientific
   results.}
 
-	\item{\textbf{Aborted}: the observation has not been correctly performed. 
+	\item{\textbf{Aborted}: the observation has not been correctly performed.
 	The observation could be recovered as planned into the planning log.}
 
 	\item{\textbf{Archived}: the observation has data available and can be found
@@ -475,7 +475,7 @@ Planned or scheduled exposure time &
 \hline
 %row no:24
 category &
-Observation category. One of the following values: Fixed, Coordinated, Window, 
+Observation category. One of the following values: Fixed, Coordinated, Window,
 Other &
 not null\\
 \hline
@@ -491,7 +491,7 @@ not null\\
 \hline
 %row no:27
 tracking\_type &
-One of the following values:  Sidereal, Solar-system-object-tracking, 
+One of the following values:  Sidereal, Solar-system-object-tracking,
 Fixed-az-el-transit &
 not null\\
 \hline
@@ -505,7 +505,7 @@ not null\\
 ObsLocTAP services are TAP services that expose a table called obsplan. This
 is a mandatory feature. The obsplan table exposed by an ObsLocTAP service MUST
 include all  the columns listed, even though null values may be permitted in
-some of the columns. Additional non-standard columns are permitted in a 
+some of the columns. Additional non-standard columns are permitted in a
 particular obsplan table implementation.
 
 The purpose of the observation locator query is to allow users/clients to
@@ -521,8 +521,8 @@ present in the IVOA ObsCore standard (\citealt{2017ivoa.spec.0509L}).
 \textbf{\textit{s\_region}}, as described on IVOA ObsCore standard, can be
 used to precisely specify the covered spatial region of a data product. The
 s\_region geometrical field is allowed to be serialised according to DALI
-(\citealt{std:DALI11}) specification, as referenced e.g. on TAP (current combination is DALI 1.1 and TAP 1.1 but future evolution would be valid), 
-or using a STC-S format described on the section 6 of TAP 1.0 
+(\citealt{std:DALI11}) specification, as referenced e.g. on TAP (current combination is DALI 1.1 and TAP 1.1 but future evolution would be valid),
+or using a STC-S format described on the section 6 of TAP 1.0
 (\citealt{2011ivoa.spec.1028T}). In the WHERE clause, s\_region constraints will generally make use of ADQL geometries (CIRCLE, POLYGON, POINT) and the geometry predicate functions (CONTAINS, INTERSECTS).
 
 In case the exact final region cannot be specified (e.g., because an undefined
@@ -564,7 +564,7 @@ removed from the planning table or they could return to the "Planned" status
 for a possible future schedule.
 
 Tracking type (\textbf{tracking\_type}) is a field of the obsplan table
-to characterize the tracking foreseen during the observation execution.  
+to characterize the tracking foreseen during the observation execution.
 In most cases, the value would be \textbf{Sidereal}. For these observations the
 pointing is mantained on the same position on the sky during all the observation
 period.
@@ -580,7 +580,7 @@ or moving object.
 
 The third possible value is \textbf{Fixed-az-el-transit}, to be used when the
 observatory points to a fixed position in local azimuth-elevation coordinates,
-allowing for a target to cross the field of view. \textbf{s\_ra} and 
+allowing for a target to cross the field of view. \textbf{s\_ra} and
 \textbf{s\_dec} would contain the value of the sidereal pointing at the time
 of the transit of the named target in \textbf{target\_name}, which would be
 an identifier of the object to be observed.
@@ -605,7 +605,7 @@ instruments or configurations used so the metadata should be present as follows:
 	 certain observation.
 	 That means that an entry should appear with a defined start time, end time
 	 and duration as relevant. The facility name should also be provided.}
-	 
+
 	\item{If the astronomical target is still hidden, coordinates and target
   should be set to \textit{null} in the obsplan table.}
 
@@ -861,8 +861,8 @@ following ADQL query:
 
 %%%%%%%%%%%%%%%%%%%% Table No: 5 starts here %%%%%%%%%%%%%%%%%%%%
 \begin{lstlisting}[language=SQL]
-SELECT * 
-FROM ivoa.obsplan 
+SELECT *
+FROM ivoa.obsplan
 WHERE
   t_min < <end_time>
   AND t_max > <start_time>
@@ -920,7 +920,7 @@ sent to the ObsLocTAP server:
 
 %%%%%%%%%%%%%%%%%%%% Table No: 8 starts here %%%%%%%%%%%%%%%%%%%%
 \begin{lstlisting}[language=SQL]
-SELECT * 
+SELECT *
 FROM ivoa.obsplan
 WHERE
   t_planning > <saved_copy_time>
@@ -950,7 +950,7 @@ FROM ivoa.obsplan
 WHERE
   t_planning > <saved_copy_time>
   AND t_max < <maximum_time_requested>
-  AND 1=INTERSECTS(s_region, 
+  AND 1=INTERSECTS(s_region,
   CIRCLE('', <TOO_ra>, <TOO_dec>, <RADIUS>))
 \end{lstlisting}
 %%%%%%%%%%%%%%%%%%%% Table No: 9 ends here %%%%%%%%%%%%%%%%%%%%
@@ -962,7 +962,7 @@ radius defined as \textit{<radius>, e.g.,}
 
 %%%%%%%%%%%%%%%%%%%% Table No: 10 starts here %%%%%%%%%%%%%%%%%%%%
 \begin{lstlisting}[language=SQL]
-SELECT * 
+SELECT *
 FROM ivoa.obsplan
 WHERE
   t_planning > 58500
@@ -1093,7 +1093,7 @@ Solar System IG, GWS WG, Registry WG and TCG chair} &
 \multicolumn{1}{|p{0.72in}}{All} &
 \multicolumn{1}{|p{0.9in}|}{{\fontsize{10pt}{12.0pt}\selectfont PR-20210609}} \\
 %row no:20
-\multicolumn{1}{|p{3.75in}}{Recommendation 1.0} &
+\multicolumn{1}{|p{3.75in}}{Recommendation changes 1.0} &
 \multicolumn{1}{|p{0.72in}}{All} &
 \multicolumn{1}{|p{0.9in}|}{{\fontsize{10pt}{12.0pt}\selectfont PR-20210724}} \\
 
