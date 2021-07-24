@@ -7,10 +7,10 @@ DOCNAME = ObsLocTAP
 DOCVERSION = 1.0
 
 # Publication date, ISO format; update manually for "releases"
-DOCDATE = 2021-07-23
+DOCDATE = 2021-07-24
 
 # What is it you're writing: NOTE, WD, PR, REC, PEN, or EN
-DOCTYPE = PR
+DOCTYPE = REC
 
 # An e-mail address of the person doing the submission to the document
 # repository (can be empty until a make upload is being made)
