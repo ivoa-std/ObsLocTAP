@@ -24,6 +24,7 @@ with missing dependencies.
 
 	<rec name="TAP" x="655" y="325"/>
 	<thisrec name="ObsLocTAP" x="655" y="400"/>
+	<rec name="ObsLocTAP" x="655" y="400"/>
 
 	<!-- Data Models: x=430..580, y=250..400 -->
 	<rec name="ObsCore" x="600" y="205"/>
